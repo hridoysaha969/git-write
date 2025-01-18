@@ -32,7 +32,7 @@ export const metadata = {
     title: "GitWrite - Simplify Your README Creation",
     description:
       "GitWrite is the ultimate tool for developers to create professional README files effortlessly. Input your project details, preview your README, and download it instantly—saving you time and effort.",
-    url: "https://yourdomain.com", // Replace with your domain
+    url: "https://gitwrite.vercel.app", // Replace with your domain
     type: "website",
     images: [
       {
