@@ -70,3 +70,40 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .container {
+    @apply max-w-5xl px-1 sm:px-2 md:px-4 lg:px-6 mx-auto;
+  }
+  .bg-dotted {
+    background-image: radial-gradient(
+      circle,
+      rgba(0, 0, 0, 0.3) 1px,
+      transparent 1px
+    );
+    background-size: 20px 20px; /* Adjust the spacing of the dots */
+    background-color: transparent; /* Set the background color */
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-[#FF512F] to-[#DD2476] bg-clip-text text-transparent;
+    background-size: 400%; /* Make the gradient larger for animation */
+    animation: gradient 5s ease-in-out infinite; /* Add animation */
+  }
+}
+@keyframes gradient {
+  0% {
+    background-position: 0 0;
+  }
+  25% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 0 50%;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
