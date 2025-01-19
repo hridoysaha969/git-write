@@ -10,18 +10,18 @@ const shadowsIntoLight = Shadows_Into_Light({
 
 const Header = () => {
   return (
-    <header className="text-center py-4 md:py-12">
+    <header className="text-center py-4 md:py-12 md:mt-8 h-[70vh]">
       <div className="container">
         <h1 className="text-2xl md:text-5xl font-semibold text-zinc-500">
           Simplify{" "}
           <span
-            className={`${shadowsIntoLight.className} select-none bg-gradient-to-r from-violet-500 to-fuchsia-400 bg-clip-text text-transparent`}
+            className={`${shadowsIntoLight.className} select-none bg-gradient-to-r from-[#FF512F] to-[#DD2476] bg-clip-text text-transparent`}
           >
             README
           </span>{" "}
           Creation for <br className="hidden sm:block" /> Your GitHub Projects
         </h1>
-        <p className="text-[16px] text-zinc-500 mt-4 max-w-2xl mx-auto">
+        <p className="text-xs tracking-wide md:text-[16px] text-zinc-500 mt-4 max-w-2xl mx-auto">
           GitWrite streamlines the process of creating detailed README files.
           Designed for developers, it turns your project details into polished
           documentation ready for GitHub.

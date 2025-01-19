@@ -1,0 +1,25 @@
+"use client";
+import { SidebarTrigger, useSidebar } from "./ui/sidebar";
+// import { Moon, Sun } from "lucide-react";
+// import { Button } from "./ui/button";
+import { Separator } from "@/components/ui/separator";
+
+const SidebarPageHeader = () => {
+  //   const { isDarkMode, toggleDarkMode } = useSidebar();
+
+  return (
+    <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+      <SidebarTrigger className="-ml-1" />
+      <Separator orientation="vertical" className="mr-2 h-4" />
+      {/* <Button variant="ghost" size="icon" onClick={toggleDarkMode}>
+        {isDarkMode ? (
+          <Sun className="w-4 h-4" />
+        ) : (
+          <Moon className="w-4 h-4" />
+        )}
+      </Button> */}
+    </header>
+  );
+};
+
+export default SidebarPageHeader;

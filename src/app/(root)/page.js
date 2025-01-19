@@ -1,9 +1,13 @@
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
-    <section className="py-8 md:py-12 bg-slate-50">
+    <section className="bg-slate-50">
+      <Navbar />
       <Header />
+      <Footer />
     </section>
   );
 }
