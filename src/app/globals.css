@@ -94,7 +94,7 @@ body {
   .bg-dotted {
     background-image: radial-gradient(
       circle,
-      rgba(0, 0, 0, 0.3) 1px,
+      rgba(0, 0, 0, 0.5) 1px,
       transparent 1px
     );
     background-size: 20px 20px; /* Adjust the spacing of the dots */
@@ -122,4 +122,50 @@ body {
   100% {
     background-position: 0 0;
   }
+}
+
+.markdown {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.markdown ul {
+  list-style-type: disc; /* Show bullet points */
+  margin-left: 20px; /* Add spacing to align bullets */
+}
+
+.markdown a {
+  color: blue; /* Set link color */
+  text-decoration: underline; /* Optional for better accessibility */
+}
+
+.markdown p {
+  margin: 0 0 10px; /* Add spacing between paragraphs */
+}
+
+.markdown h2 {
+  margin: 22px 0 10px;
+  font-weight: bold;
+}
+.markdown h3 {
+  margin: 20px 0 10px;
+  font-weight: bold;
+}
+.markdown h1 {
+  margin: 24px 0 10px;
+  font-weight: bold;
+}
+
+.markdown code {
+  background-color: #f4f4f4; /* Highlight inline code */
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: "Courier New", monospace;
+}
+
+.markdown pre {
+  background-color: #f4f4f4; /* Highlight code blocks */
+  padding: 10px;
+  border-radius: 4px;
+  overflow-x: auto; /* Scroll long code lines */
 }

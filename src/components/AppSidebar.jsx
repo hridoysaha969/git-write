@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import { VersionSwitcher } from "@/components/VersionSwitcher";
 import {
@@ -16,157 +17,75 @@ import {
 } from "@/components/ui/sidebar";
 import { NavMain } from "./NavMain";
 import { NavUser } from "./NavUser";
-import { SECTIONS } from "@/lib/constant";
-
-// This is sample data.
-const data = {
-  versions: ["Free (Basic Features)", "Pro (AI-Generated)"],
-  navMain: [
-    {
-      title: "Getting Started",
-      url: "#",
-      items: [
-        {
-          title: "Installation",
-          url: "#",
-        },
-        {
-          title: "Project Structure",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Building Your Application",
-      url: "#",
-      items: [
-        {
-          title: "Routing",
-          url: "#",
-        },
-        {
-          title: "Data Fetching",
-          url: "#",
-          isActive: true,
-        },
-        {
-          title: "Rendering",
-          url: "#",
-        },
-        {
-          title: "Caching",
-          url: "#",
-        },
-        {
-          title: "Styling",
-          url: "#",
-        },
-        {
-          title: "Optimizing",
-          url: "#",
-        },
-        {
-          title: "Configuring",
-          url: "#",
-        },
-        {
-          title: "Testing",
-          url: "#",
-        },
-        {
-          title: "Authentication",
-          url: "#",
-        },
-        {
-          title: "Deploying",
-          url: "#",
-        },
-        {
-          title: "Upgrading",
-          url: "#",
-        },
-        {
-          title: "Examples",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "API Reference",
-      url: "#",
-      items: [
-        {
-          title: "Components",
-          url: "#",
-        },
-        {
-          title: "File Conventions",
-          url: "#",
-        },
-        {
-          title: "Functions",
-          url: "#",
-        },
-        {
-          title: "next.config.js Options",
-          url: "#",
-        },
-        {
-          title: "CLI",
-          url: "#",
-        },
-        {
-          title: "Edge Runtime",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Architecture",
-      url: "#",
-      items: [
-        {
-          title: "Accessibility",
-          url: "#",
-        },
-        {
-          title: "Fast Refresh",
-          url: "#",
-        },
-        {
-          title: "Next.js Compiler",
-          url: "#",
-        },
-        {
-          title: "Supported Browsers",
-          url: "#",
-        },
-        {
-          title: "Turbopack",
-          url: "#",
-        },
-      ],
-    },
-  ],
-};
+import { SECTIONS, VERSION } from "@/lib/constant";
 
 export function AppSidebar({ ...props }) {
+  const version = VERSION;
+
   const sections = SECTIONS;
+  const [availableSlugs, setAvailableSlugs] = React.useState([]);
+  const [chosenSlugs, setChosenSlugs] = React.useState([]);
+
+  React.useEffect(() => {
+    const savedAvailableSlugs = JSON.parse(
+      localStorage.getItem("availableSlugs")
+    );
+    const savedChosenSlugs = JSON.parse(localStorage.getItem("chosenSlugs"));
+
+    if (savedAvailableSlugs && savedChosenSlugs) {
+      setAvailableSlugs(savedAvailableSlugs);
+      setChosenSlugs(savedChosenSlugs);
+      console.log(savedAvailableSlugs);
+    } else {
+      setAvailableSlugs(sections.map((item) => item.tab_id));
+      setChosenSlugs([]);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem("availableSlugs", JSON.stringify(availableSlugs));
+    localStorage.setItem("chosenSlugs", JSON.stringify(chosenSlugs));
+  }, [availableSlugs, chosenSlugs]);
+
+  // Get filtered data based on slugs
+  const availableContent = sections.filter((item) =>
+    availableSlugs.includes(item.tab_id)
+  );
+  const chosenContent = sections.filter((item) =>
+    chosenSlugs.includes(item.tab_id)
+  );
+
+  // Handle choosing an item
+  const handleChoose = (slug) => {
+    setAvailableSlugs(availableSlugs.filter((item) => item !== slug));
+    setChosenSlugs([...chosenSlugs, slug]);
+  };
+
+  // Handle removing an item
+  const handleRemove = (slug) => {
+    setChosenSlugs(chosenSlugs.filter((item) => item !== slug));
+    setAvailableSlugs([...availableSlugs, slug]);
+  };
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <VersionSwitcher
-          versions={data.versions}
-          defaultVersion={data.versions[0]}
-        />
+        <VersionSwitcher versions={version} defaultVersion={version[0]} />
       </SidebarHeader>
+
       <SidebarContent>
-        {sections.map((section, ind) => (
-          <NavMain items={section} key={ind} />
-        ))}
+        {/* <NavMain items={chosenContent} title="Your Section" /> */}
+        <NavMain
+          items={availableContent}
+          title="Available Section"
+          availableSlugs={availableSlugs}
+          setAvailableSlugs={setAvailableSlugs}
+          chosenSlugs={chosenSlugs}
+          setChosenSlugs={setChosenSlugs}
+        />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

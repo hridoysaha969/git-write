@@ -1,33 +1,17 @@
 export const SECTIONS = [
   {
-    title: "Your Sections",
-    tabs: [
-      {
-        tab_id: "title_description",
-        title: "Title & Description",
-        code: `# Project Title
-
-                A brief description of what this project does and who it's for
-                `,
-      },
-    ],
-  },
-  {
-    title: "Available Sections",
-    tabs: [
-      {
-        tab_id: "license",
-        title: "License",
-        code: `
+    tab_id: "license",
+    title: "License",
+    code: `
         ## License
 
         [License Title](https://your-license-url)
         `,
-      },
-      {
-        tab_id: "acknowledgement",
-        title: "Acknowledgements",
-        code: `
+  },
+  {
+    tab_id: "acknowledgement",
+    title: "Acknowledgements",
+    code: `
 
         ## Acknowledgements
 
@@ -37,11 +21,11 @@ export const SECTIONS = [
        
        
         `,
-      },
-      {
-        tab_id: "badges",
-        title: "Badges",
-        code: `
+  },
+  {
+    tab_id: "badges",
+    title: "Badges",
+    code: `
 
         ## Badges
 
@@ -53,7 +37,25 @@ export const SECTIONS = [
         
         
         `,
-      },
-    ],
+  },
+];
+
+export const VERSION = ["free", "pro"];
+
+const data = [
+  {
+    slug: "get-started",
+    title: "Get Started",
+    sescription: "This is Get Started description.",
+  },
+  {
+    slug: "my-docs",
+    title: "My Docs",
+    sescription: "This is My Docs description.",
+  },
+  {
+    slug: "project-overview",
+    title: "Project Overview",
+    sescription: "This is Project Overview description.",
   },
 ];

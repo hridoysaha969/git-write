@@ -17,7 +17,6 @@ import {
 
 export function VersionSwitcher({ versions, defaultVersion }) {
   const [selectedVersion, setSelectedVersion] = React.useState(defaultVersion);
-  const isProUser = false;
 
   return (
     <SidebarMenu>
@@ -33,7 +32,11 @@ export function VersionSwitcher({ versions, defaultVersion }) {
               </div>
               <div className="flex flex-col gap-0.5 leading-none">
                 <span className="font-semibold">Select Feature</span>
-                <span className="">{selectedVersion}</span>
+                <span className="">
+                  {selectedVersion === "pro"
+                    ? "Pro (AI-Generated)"
+                    : "Free (Basic Features)"}
+                </span>
               </div>
               <ChevronsUpDown className="ml-auto" />
             </SidebarMenuButton>
@@ -46,13 +49,11 @@ export function VersionSwitcher({ versions, defaultVersion }) {
               <DropdownMenuItem
                 key={version}
                 onSelect={() => setSelectedVersion(version)}
-                disabled={!isProUser && version === "Pro (AI-Generated)"}
               >
-                {version}
+                {version === "pro"
+                  ? "Pro (AI-Generated)"
+                  : "Free (Basic Features)"}
                 {version === selectedVersion && <Check className="ml-auto" />}
-                {!isProUser && version === "Pro (AI-Generated)" && (
-                  <Lock className="ml-auto text-gray-400" />
-                )}
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
