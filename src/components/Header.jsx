@@ -10,8 +10,8 @@ const shadowsIntoLight = Shadows_Into_Light({
 
 const Header = () => {
   return (
-    <header className="text-center py-4 md:py-12 md:mt-8 h-[70vh]">
-      <div className="container">
+    <header className="text-center py-4 md:py-12 md:mt-8 md:h-[70vh] h-[60vh]">
+      <div className="container h-full flex flex-col justify-center items-center relative">
         <h1 className="text-2xl md:text-5xl font-semibold text-zinc-500">
           Simplify{" "}
           <span
@@ -33,7 +33,8 @@ const Header = () => {
         </Button>
       </div>
 
-      <div className="absolute w-1/4 h-[300px] bg-dotted top-[10%] right-0"></div>
+      <div className="absolute md:w-[300px] w-1/4 h-[300px] bg-dotted top-[10%] right-0"></div>
+      <div className="absolute md:w-[300px] w-1/4 h-[300px] bg-dotted bottom-[10%] left-0"></div>
     </header>
   );
 };

@@ -7,33 +7,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { PlusCircle, Trash2 } from "lucide-react";
 
-export function NavMain({
-  items,
-  title,
-  availableSlugs,
-  setAvailableSlugs,
-  chosenSlugs,
-  setChosenSlugs,
-}) {
+export function NavMain({ items, title, addSection, removeSection }) {
   // Handle choosing an item
-  const handleChoose = (slug) => {
-    const updatedAvailableSlugs = availableSlugs.filter(
-      (item) => item !== slug
-    );
-    const updatedChosenSlugs = [...chosenSlugs, slug];
-
-    // Update state
-    setAvailableSlugs(updatedAvailableSlugs);
-    setChosenSlugs(updatedChosenSlugs);
-
-    // Update local storage
-    localStorage.setItem(
-      "availableSlugs",
-      JSON.stringify(updatedAvailableSlugs)
-    );
-    localStorage.setItem("chosenSlugs", JSON.stringify(updatedChosenSlugs));
-  };
 
   return (
     <SidebarGroup>
@@ -42,8 +19,23 @@ export function NavMain({
         {items && items.length > 0 ? (
           items.map((tab, ind) => (
             <SidebarMenuItem key={ind}>
-              <SidebarMenuButton tooltip={"Tooltip"}>
+              <SidebarMenuButton
+                tooltip={"Tooltip"}
+                className="flex items-center justify-between py-1 px-3 rounded bg-white shadow-sm"
+              >
                 <span>{tab.title}</span>
+                {addSection && (
+                  <PlusCircle
+                    className="cursor-pointer text-blue-500"
+                    onClick={() => addSection(tab.tab_id)}
+                  />
+                )}
+                {removeSection && (
+                  <Trash2
+                    className="cursor-pointer text-red-400"
+                    onClick={() => removeSection(tab.tab_id)}
+                  />
+                )}
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))

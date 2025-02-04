@@ -14,10 +14,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { useSections } from "@/contexts/SectionContext";
 
-export function VersionSwitcher({ versions, defaultVersion }) {
-  const [selectedVersion, setSelectedVersion] = React.useState(defaultVersion);
-
+export function VersionSwitcher() {
+  const { versions, version, updateVersion } = useSections();
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -33,7 +33,7 @@ export function VersionSwitcher({ versions, defaultVersion }) {
               <div className="flex flex-col gap-0.5 leading-none">
                 <span className="font-semibold">Select Feature</span>
                 <span className="">
-                  {selectedVersion === "pro"
+                  {version === "pro"
                     ? "Pro (AI-Generated)"
                     : "Free (Basic Features)"}
                 </span>
@@ -45,15 +45,10 @@ export function VersionSwitcher({ versions, defaultVersion }) {
             className="w-[--radix-dropdown-menu-trigger-width]"
             align="start"
           >
-            {versions.map((version) => (
-              <DropdownMenuItem
-                key={version}
-                onSelect={() => setSelectedVersion(version)}
-              >
-                {version === "pro"
-                  ? "Pro (AI-Generated)"
-                  : "Free (Basic Features)"}
-                {version === selectedVersion && <Check className="ml-auto" />}
+            {versions.map((v) => (
+              <DropdownMenuItem key={v} onSelect={() => updateVersion(v)}>
+                {v === "pro" ? "Pro (AI-Generated)" : "Free (Basic Features)"}
+                {v === version && <Check className="ml-auto" />}
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>

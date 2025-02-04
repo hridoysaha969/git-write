@@ -4,6 +4,7 @@ import Preview from "@/components/Preview";
 import SidebarPageHeader from "@/components/SidebarPageHeader";
 
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { SectionProvider } from "@/contexts/SectionContext";
 import { useState } from "react";
 
 export default function Page() {
@@ -12,14 +13,16 @@ export default function Page() {
   );
 
   return (
-    <SidebarProvider>
-      <AppSidebar />
+    <SectionProvider>
+      <SidebarProvider>
+        <AppSidebar />
 
-      <SidebarInset>
-        <SidebarPageHeader />
+        <SidebarInset>
+          <SidebarPageHeader />
 
-        <Preview markdown={markdown} setMarkdown={setMarkdown} />
-      </SidebarInset>
-    </SidebarProvider>
+          <Preview />
+        </SidebarInset>
+      </SidebarProvider>
+    </SectionProvider>
   );
 }
