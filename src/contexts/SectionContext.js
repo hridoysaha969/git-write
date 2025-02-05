@@ -24,9 +24,13 @@ export const SectionProvider = ({ children }) => {
     setSelectedSection(
       storedSelectedSection ? JSON.parse(storedSelectedSection) : []
     );
-    setAvailableSection(
-      storedAvailableSection ? JSON.parse(storedAvailableSection) : sections
+    const parsedSections = storedAvailableSection
+      ? JSON.parse(storedAvailableSection)
+      : sections;
+    const sortedSection = parsedSections.sort((a, b) =>
+      a.title.localeCompare(b.title)
     );
+    setAvailableSection(sortedSection);
     setReadmeContent(storedReadmeContent ? storedReadmeContent : "");
   }, []);
 
@@ -45,24 +49,28 @@ export const SectionProvider = ({ children }) => {
     setAvailableSection(availableSection.filter((s) => s.tab_id !== tab_id));
 
     // Append section code to readme content
-    setReadmeContent(
-      (prevContent) =>
-        prevContent + (prevContent ? "\n\n\n" : "") + section.code
-    );
+    setReadmeContent((prevContent) => prevContent + section.code);
   };
 
   const removeSection = (tab_id) => {
-    const sectionIndex = selectedSections.findIndex((s) => s.tab_id === tab_id);
+    const sectionIndex = selectedSection.findIndex((s) => s.tab_id === tab_id);
     if (sectionIndex === -1) return;
 
-    const updatedSections = selectedSections.filter((s) => s.tab_id !== tab_id);
-    setSelectedSections(updatedSections);
+    const updatedSections = selectedSection.filter((s) => s.tab_id !== tab_id);
+    setSelectedSection(updatedSections);
 
     // Move section back to "Available Sections"
-    setAvailableSections([
-      ...availableSections,
-      selectedSections[sectionIndex],
-    ]);
+    // setAvailableSection([...availableSection, selectedSection[sectionIndex]]);
+    setAvailableSection((prev) => {
+      const updatedAvailable = [...prev, selectedSection[sectionIndex]].sort(
+        (a, b) => a.title.localeCompare(b.title)
+      );
+      localStorage.setItem(
+        "availableSections",
+        JSON.stringify(updatedAvailable)
+      ); // Update localStorage
+      return updatedAvailable;
+    });
 
     // Remove the section content from `readmeContent`
     setReadmeContent((prevContent) => {
@@ -76,10 +84,6 @@ export const SectionProvider = ({ children }) => {
     // Update localStorage
     localStorage.setItem("selectedSections", JSON.stringify(updatedSections));
   };
-
-  // const updateReadmeContent = (newContent) => {
-  //   setReadmeContent(newContent);
-  // };
 
   const updateVersion = (newVersion) => {
     setVersion(newVersion);
@@ -95,7 +99,7 @@ export const SectionProvider = ({ children }) => {
         version,
         addSection,
         removeSection,
-        updateReadmeContent,
+        setReadmeContent,
         updateVersion,
       }}
     >

@@ -1,11 +1,25 @@
 "use client";
 import { useSections } from "@/contexts/SectionContext";
-import React from "react";
+import React, { useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 const Preview = () => {
-  const { readmeContent, updateReadmeContent } = useSections();
+  const { readmeContent, setReadmeContent } = useSections();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (
+        readmeContent.trim().length > 0 &&
+        !readmeContent.endsWith("\n\n\n")
+      ) {
+        setReadmeContent(readmeContent + "\n\n\n"); // Add only if not already added
+      }
+    }, 1000); // Wait 1 second after user stops typing
+
+    return () => clearTimeout(timeout); // Clear timeout on new keystroke
+  }, [readmeContent]);
+
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
       <div className="flex flex-col lg:flex-row gap-4">
@@ -14,7 +28,7 @@ const Preview = () => {
           {/* Editor */}
           <textarea
             value={readmeContent}
-            onChange={(e) => updateReadmeContent(e.target.value)}
+            onChange={(e) => setReadmeContent(e.target.value)}
             className="w-full p-3 text-sm font-mono h-[300px] md:h-[500px] bg-zinc-700 text-white"
           />
         </div>
