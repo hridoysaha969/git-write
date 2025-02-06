@@ -24,6 +24,7 @@ export const SectionProvider = ({ children }) => {
     setSelectedSection(
       storedSelectedSection ? JSON.parse(storedSelectedSection) : []
     );
+
     const parsedSections = storedAvailableSection
       ? JSON.parse(storedAvailableSection)
       : sections;

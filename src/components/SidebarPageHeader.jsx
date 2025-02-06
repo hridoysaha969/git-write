@@ -1,10 +1,11 @@
 "use client";
-import { Download } from "lucide-react";
+import { Download, Home } from "lucide-react";
 import { SidebarTrigger, useSidebar } from "./ui/sidebar";
 // import { Moon, Sun } from "lucide-react";
 // import { Button } from "./ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useSections } from "@/contexts/SectionContext";
+import Link from "next/link";
 
 const SidebarPageHeader = () => {
   const { readmeContent } = useSections();
@@ -36,6 +37,9 @@ const SidebarPageHeader = () => {
           <Moon className="w-4 h-4" />
         )}
       </Button> */}
+        <Link href={"/"}>
+          <Home className="h-4 w-4 -ml-1" />
+        </Link>
       </div>
 
       <div>

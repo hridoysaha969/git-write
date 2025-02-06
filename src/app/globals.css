@@ -144,7 +144,7 @@ body {
 }
 
 .markdown h2 {
-  margin: 22px 0 10px;
+  margin: 24px 0 10px;
   font-weight: bold;
 }
 .markdown h3 {
@@ -152,7 +152,7 @@ body {
   font-weight: bold;
 }
 .markdown h1 {
-  margin: 24px 0 10px;
+  margin: 28px 0 10px;
   font-weight: bold;
 }
 

@@ -5,23 +5,25 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
   SidebarRail,
-  useSidebar,
 } from "@/components/ui/sidebar";
 import { NavMain } from "./NavMain";
 import { NavUser } from "./NavUser";
 import { useSections } from "@/contexts/SectionContext";
+import NotRegister from "./NotRegister";
 
 export function AppSidebar({ ...props }) {
-  const { availableSection, selectedSection, addSection, removeSection } =
-    useSections();
+  const {
+    version,
+    updateVersion,
+    availableSection,
+    selectedSection,
+    addSection,
+    removeSection,
+  } = useSections();
+
+  console.log(version);
 
   return (
     <Sidebar {...props}>
@@ -30,16 +32,23 @@ export function AppSidebar({ ...props }) {
       </SidebarHeader>
 
       <SidebarContent>
-        <NavMain
-          items={selectedSection}
-          title="Selected Section"
-          removeSection={removeSection}
-        />
-        <NavMain
-          items={availableSection}
-          title="Available Section"
-          addSection={addSection}
-        />
+        {version === "free" ? (
+          <>
+            {" "}
+            <NavMain
+              items={selectedSection}
+              title="Selected Section"
+              removeSection={removeSection}
+            />
+            <NavMain
+              items={availableSection}
+              title="Available Section"
+              addSection={addSection}
+            />
+          </>
+        ) : (
+          <NotRegister />
+        )}
       </SidebarContent>
       <SidebarFooter>
         <NavUser />

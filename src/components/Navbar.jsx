@@ -4,10 +4,10 @@ import Logo from "./Logo";
 
 const Navbar = () => {
   return (
-    <nav className="py-2 px-2 shadow-md bg-gray-50">
+    <nav className="py-3 px-2 shadow-md bg-gray-50">
       <div className="container flex items-center justify-between">
         <Logo />
-        <ul className="flex items-center gap-4">
+        {/* <ul className="flex items-center gap-4">
           <li>
             <Link href="/" className="text-zinc-500 font-semibold">
               Home
@@ -23,7 +23,7 @@ const Navbar = () => {
               Pricing
             </Link>
           </li>
-        </ul>
+        </ul> */}
       </div>
     </nav>
   );
