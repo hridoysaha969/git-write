@@ -4,7 +4,7 @@ export default function Features() {
   return (
     <section className="py-16">
       <div className="max-w-6xl mx-auto text-center px-6">
-        <h2 className="text-4xl text-zinc-500 font-bold mb-6">
+        <h2 className="text-2xl md:text-4xl text-zinc-500 font-bold mb-6">
           Powerful Features for Effortless README Generation
         </h2>
         <p className="text-lg text-zinc-400 mb-12">
