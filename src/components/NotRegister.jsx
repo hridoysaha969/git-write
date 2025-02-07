@@ -12,7 +12,7 @@ const NotRegister = () => {
         You must be logged in to use this feature.
       </p>
       <Button asChild>
-        <Link href={"/login"} className="w-full">
+        <Link href={"/sign-in"} className="w-full">
           Login
         </Link>
       </Button>

@@ -1,11 +1,8 @@
 "use client";
 
 import {
-  BadgeCheck,
-  Bell,
   BookOpen,
   ChevronsUpDown,
-  CreditCard,
   LogIn,
   LogOut,
   Sparkles,
@@ -56,7 +53,7 @@ export function NavUser() {
                   {user ? user.name : "Guest"}
                 </span>
                 <span className="truncate text-xs">
-                  {user ? user.email : "Sign up to access"}
+                  {user ? user.email : "Welcome to GitWrite"}
                 </span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
@@ -126,7 +123,7 @@ export function NavUser() {
               <DropdownMenuGroup>
                 <DropdownMenuItem>
                   <Button asChild>
-                    <Link href={"/login"} className="w-full">
+                    <Link href={"/sign-in"} className="w-full">
                       <LogIn />
                       Login
                     </Link>

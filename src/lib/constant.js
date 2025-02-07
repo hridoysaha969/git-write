@@ -1,3 +1,10 @@
+import {
+  ENTERPRICE_PLAN,
+  FREE_PLAN,
+  PREMIUM_PLAN,
+  STANDARD_PLAN,
+} from "./prices";
+
 export const SECTIONS = [
   {
     tab_id: "license",
@@ -181,6 +188,51 @@ _Name the technologies used in the project._
 ];
 
 export const VERSION = ["free", "pro"];
+
+export const PLANS = [
+  // {
+  //   title: "Free",
+  //   price: FREE_PLAN,
+  //   description: "Get started with AI-generated README files.",
+  //   features: [
+  //     "5 AI-generated README files",
+  //     "Basic formatting",
+  //     "No customization options",
+  //   ],
+  // },
+  {
+    title: "Starter",
+    price: STANDARD_PLAN,
+    description: "Perfect for small projects and personal use.",
+    features: [
+      "100 AI-generated README files",
+      "Basic formatting",
+      "Limited customization options",
+    ],
+  },
+  {
+    title: "Pro",
+    price: PREMIUM_PLAN,
+    description: "Great for developers managing multiple repositories.",
+    features: [
+      "500 AI-generated README files",
+      "Advanced formatting",
+      "Custom sections",
+      "Priority email support",
+    ],
+  },
+  {
+    title: "Enterprise",
+    price: ENTERPRICE_PLAN,
+    description: "Best for agencies and large teams.",
+    features: [
+      "1000 AI-generated README files",
+      "Full customization",
+      "Collaboration features",
+      "Dedicated support",
+    ],
+  },
+];
 
 const data = [
   {

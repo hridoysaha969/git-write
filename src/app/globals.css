@@ -105,6 +105,9 @@ body {
     background-size: 400%; /* Make the gradient larger for animation */
     animation: gradient 5s ease-in-out infinite; /* Add animation */
   }
+  .show-menu {
+    @apply flex flex-col gap-4 items-center sm:hidden absolute top-full z-10 right-0 p-4 w-full h-max bg-white shadow-md;
+  }
 }
 @keyframes gradient {
   0% {

@@ -1,5 +1,12 @@
+import Form from "@/components/Form";
+import React from "react";
+
 const SignIn = () => {
-  return <div>This is sign in page</div>;
+  return (
+    <section>
+      <Form type="sign-in" />
+    </section>
+  );
 };
 
 export default SignIn;

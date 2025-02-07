@@ -1,22 +1,26 @@
+"use client";
 import Link from "next/link";
 import Logo from "./Logo";
+import { AlignJustify, X } from "lucide-react";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 // import { Button } from "./ui/button";
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false);
   return (
-    <nav className="py-3 px-2 shadow-md bg-gray-50">
+    <nav className="py-3 px-2 shadow-md bg-gray-50 relative">
       <div className="container flex items-center justify-between">
         <Logo />
-        {/* <ul className="flex items-center gap-4">
+        <ul
+          className={cn("hidden sm:flex items-center gap-4", {
+            "show-menu": open,
+          })}
+        >
           <li>
             <Link href="/" className="text-zinc-500 font-semibold">
               Home
-            </Link>
-          </li>
-          <li>
-            <Link href="/feature" className="text-zinc-500 font-semibold">
-              Feature
             </Link>
           </li>
           <li>
@@ -24,7 +28,17 @@ const Navbar = () => {
               Pricing
             </Link>
           </li>
-        </ul> */}
+        </ul>
+        <button
+          className="block sm:hidden font-semibold outline-none focus:outline-none"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? (
+            <X className="w-6 h-6" />
+          ) : (
+            <AlignJustify className="w-6 h-6" />
+          )}
+        </button>
       </div>
     </nav>
   );

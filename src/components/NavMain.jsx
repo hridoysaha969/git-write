@@ -21,7 +21,7 @@ export function NavMain({ items, title, addSection, removeSection }) {
             <SidebarMenuItem key={ind}>
               <SidebarMenuButton
                 tooltip={"Tooltip"}
-                className="flex items-center justify-between py-1 px-3 rounded bg-white shadow-sm"
+                className="flex items-center justify-between py-2 px-3 rounded bg-white shadow-sm mb-2"
               >
                 <span>{tab.title}</span>
                 {addSection && (
