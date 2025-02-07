@@ -36,7 +36,54 @@ const Preview = () => {
           <h4>Preview</h4>
           {/* Preview */}
           <div className="w-full p-3 rounded-sm h-[300px] md:h-[500px] overflow-y-auto markdown">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                img: ({ node, ...props }) => (
+                  <img
+                    {...props}
+                    style={{
+                      height: "30px",
+                      marginRight: "10px",
+                      display: "inline-block",
+                    }}
+                  />
+                ),
+                table: ({ children }) => (
+                  <table
+                    style={{
+                      width: "100%",
+                      border: "1px solid #ddd",
+                      borderCollapse: "collapse",
+                      marginTop: "10px",
+                    }}
+                  >
+                    {children}
+                  </table>
+                ),
+                // Customize how table rows are rendered
+                tr: ({ children }) => (
+                  <tr style={{ borderBottom: "1px solid #ddd" }}>{children}</tr>
+                ),
+                // Customize how table cells (td) are rendered
+                td: ({ children }) => (
+                  <td style={{ padding: "8px", textAlign: "left" }}>
+                    {children}
+                  </td>
+                ),
+                th: ({ children }) => (
+                  <th
+                    style={{
+                      padding: "8px",
+                      backgroundColor: "#f4f4f4",
+                      textAlign: "left",
+                    }}
+                  >
+                    {children}
+                  </th>
+                ),
+              }}
+            >
               {readmeContent}
             </ReactMarkdown>
           </div>

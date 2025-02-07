@@ -98,6 +98,7 @@ export const SectionProvider = ({ children }) => {
         readmeContent,
         versions,
         version,
+        setAvailableSection,
         addSection,
         removeSection,
         setReadmeContent,

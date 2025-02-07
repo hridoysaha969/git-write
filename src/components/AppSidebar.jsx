@@ -16,7 +16,6 @@ import NotRegister from "./NotRegister";
 export function AppSidebar({ ...props }) {
   const {
     version,
-    updateVersion,
     availableSection,
     selectedSection,
     addSection,
