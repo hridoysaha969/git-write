@@ -44,7 +44,7 @@ const Preview = () => {
                     {...props}
                     style={{
                       height: "30px",
-                      marginRight: "10px",
+                      margin: "10px",
                       display: "inline-block",
                     }}
                   />
