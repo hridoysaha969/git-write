@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { CONNECTIONSTR } from "@/lib/constant";
+import { useRouter } from "next/navigation";
 
 export default function Form({ type }) {
   const [name, setName] = useState("");
@@ -11,13 +13,14 @@ export default function Form({ type }) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     if (type === "sign-in") {
-      if (email.trim() === "" && password.trim() === "") {
+      if (email.trim() === "" || password.trim() === "") {
         setError("Required fields are missing");
         return;
       }
@@ -26,20 +29,43 @@ export default function Form({ type }) {
       setEmail("");
       setPassword("");
     } else {
-      if (name.trim() === "" && email.trim() === "" && password.trim() === "") {
+      if (name.trim() === "" || email.trim() === "" || password.trim() === "") {
         setError("Required fields are missing");
         return;
       }
 
-      console.log({ name, email, password });
+      const response = await fetch("/api/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password, type, aggrement: true }),
+      });
+      const data = await response.json();
+
+      if (!data.success) {
+        setError(data.message);
+        setLoading(false);
+        return;
+      }
+
+      console.log(data);
+
       setName("");
       setEmail("");
       setPassword("");
+      setLoading(false);
+      router.push("/generate");
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="flex flex-col items-center px-2 justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+      {error && (
+        <div className="py-2 px-4 bg-red-300 text-red-800 font-semibold rounded-md mb-4">
+          {error}
+        </div>
+      )}
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -92,7 +118,11 @@ export default function Form({ type }) {
               required
             />
           </div>
-          <Button type="submit" className="w-full p-2 text-white rounded-lg">
+          <Button
+            type="submit"
+            className="w-full disabled:bg-gray-500 p-2 text-white rounded-lg"
+            disabled={loading}
+          >
             {type === "sign-in" ? "Login" : "Sign Up"}
           </Button>
         </form>
