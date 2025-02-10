@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { CONNECTIONSTR } from "@/lib/constant";
 import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
 
 export default function Form({ type }) {
   const [name, setName] = useState("");
@@ -43,17 +43,16 @@ export default function Form({ type }) {
       });
       const data = await response.json();
 
+      setName("");
+      setEmail("");
+      setPassword("");
+
       if (!data.success) {
         setError(data.message);
         setLoading(false);
         return;
       }
-
       console.log(data);
-
-      setName("");
-      setEmail("");
-      setPassword("");
       setLoading(false);
       router.push("/generate");
     }
@@ -124,6 +123,7 @@ export default function Form({ type }) {
             disabled={loading}
           >
             {type === "sign-in" ? "Login" : "Sign Up"}
+            {loading && <Loader2 className="w-4 h-4 animate-spin ml-1" />}
           </Button>
         </form>
         <p className="mt-4 text-center text-gray-600 dark:text-gray-400">

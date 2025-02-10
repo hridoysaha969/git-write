@@ -5,19 +5,23 @@ import { notFound } from "next/navigation";
 
 async function verifyEmail(token) {
   try {
-    let res = await fetch(`/api/verify-email?token=${token}`);
-    res = await res.json();
+    const url =
+      process.env.NODE_ENV !== "development"
+        ? `https://gitwrite.vercel.app/api/verify-email?token=${token}`
+        : `http://localhost:3000/api/verify-email?token=${token}`;
 
-    console.log(res);
-    console.log(`/api/verify-email?token=${token}`);
+    const res = await fetch(url);
 
-    if (res.success) {
-      return true;
-    } else {
-      notFound();
+    if (!res.ok) {
+      return null;
     }
+    const data = await res.json();
+    if (!data.success) return null;
+
+    return data;
   } catch (error) {
-    notFound();
+    console.error("Error verifying email:", error);
+    return null;
   }
 }
 
