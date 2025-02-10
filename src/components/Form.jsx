@@ -40,20 +40,21 @@ export default function Form({ type }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ name, email, password, type, aggrement: true }),
+        redirect: "follow",
       });
+
       const data = await response.json();
-
-      setName("");
-      setEmail("");
-      setPassword("");
-
       if (!data.success) {
         setError(data.message);
         setLoading(false);
         return;
       }
-      console.log(data);
+      setName("");
+      setEmail("");
+      setPassword("");
       setLoading(false);
+
+      console.log(data);
       router.push("/generate");
     }
   };
