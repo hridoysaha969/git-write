@@ -38,6 +38,7 @@ export default function Form({ type }) {
           title: "Required fields are missing",
           description: "Please enter valid email and strong password!",
         });
+        setLoading(false);
         return;
       }
 
@@ -53,6 +54,12 @@ export default function Form({ type }) {
       const data = await response.json();
       if (!data.success) {
         setError(data.message);
+        toast({
+          variant: "destructive",
+          title: data.message,
+          description:
+            "Something went wrong while signing up! Please try again.",
+        });
         setLoading(false);
         return;
       }
@@ -62,22 +69,23 @@ export default function Form({ type }) {
       setLoading(false);
 
       console.log(data);
-      router.push("/generate");
+
       toast({
         title: "Signup Successful!",
         description:
           "Please verify your email. We've sent you a verification email. Don't forget to check spam folder.",
       });
     }
+    router.push("/generate");
   };
 
   return (
     <div className="flex flex-col items-center px-2 justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      {error && (
+      {/* {error && (
         <div className="py-2 px-4 bg-red-300 text-red-800 font-semibold rounded-md mb-4">
           {error}
         </div>
-      )}
+      )} */}
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}

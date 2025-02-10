@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { Inter, Roboto } from "next/font/google";
 
@@ -66,7 +67,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${roboto.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children} <Toaster />
+      </body>
     </html>
   );
 }

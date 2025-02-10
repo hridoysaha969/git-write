@@ -76,7 +76,7 @@ export async function POST(req) {
 
       await user.save();
 
-      // await sendVerificationEmail(email, token);
+      await sendVerificationEmail(email, token);
 
       const response = NextResponse.json(
         { message: "New user has been created", result: user, success: true },
