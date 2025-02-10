@@ -45,7 +45,7 @@ export default function PricingSection() {
             <Button className="mt-8 w-full py-3 font-semibold rounded-lg transition-colors">
               Get Started
             </Button>
-            {plan.title === "Enterprise" && (
+            {plan.title === "Pro" && (
               <span className="absolute top-4 right-4 bg-gradient-to-r from-[#FF512F] to-[#DD2476] text-white text-xs font-semibold px-3 py-1 rounded-full">
                 Best Value
               </span>
