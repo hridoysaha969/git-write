@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Form({ type }) {
   const [name, setName] = useState("");
@@ -14,6 +15,7 @@ export default function Form({ type }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const router = useRouter();
+  const { toast } = useToast();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +33,11 @@ export default function Form({ type }) {
     } else {
       if (name.trim() === "" || email.trim() === "" || password.trim() === "") {
         setError("Required fields are missing");
+        toast({
+          variant: "destructive",
+          title: "Required fields are missing",
+          description: "Please enter valid email and strong password!",
+        });
         return;
       }
 
@@ -56,6 +63,11 @@ export default function Form({ type }) {
 
       console.log(data);
       router.push("/generate");
+      toast({
+        title: "Signup Successful!",
+        description:
+          "Please verify your email. We've sent you a verification email. Don't forget to check spam folder.",
+      });
     }
   };
 

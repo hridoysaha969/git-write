@@ -74,7 +74,7 @@ const htmlTemplate = (verificationLink) => {
       <p>If you did not create an account, you can safely ignore this email.</p>
     </div>
     <div class="footer">
-      <p>&copy; 2023 Your Company. All rights reserved.</p>
+      <p>&copy; 2025 GitWrite. All rights reserved.</p>
     </div>
   </div>
 </body>

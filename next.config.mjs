@@ -10,7 +10,7 @@ const nextConfig = {
         headers: [
           {
             key: "Keep-Alive",
-            value: "timeout=30, max=1000", // Increase API timeout
+            value: "timeout=30, max=10000", // Increase API timeout
           },
         ],
       },
