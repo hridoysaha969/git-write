@@ -12,6 +12,8 @@ import { NavMain } from "./NavMain";
 import { NavUser } from "./NavUser";
 import { useSections } from "@/contexts/SectionContext";
 import NotRegister from "./NotRegister";
+import { useAuth } from "@/contexts/AuthContext";
+import FeatureContainer from "./FeatureContainer";
 
 export function AppSidebar({ ...props }) {
   const {
@@ -22,7 +24,7 @@ export function AppSidebar({ ...props }) {
     removeSection,
   } = useSections();
 
-  console.log(version);
+  const { currentUser } = useAuth();
 
   return (
     <Sidebar {...props}>
@@ -45,6 +47,8 @@ export function AppSidebar({ ...props }) {
               addSection={addSection}
             />
           </>
+        ) : currentUser ? (
+          <FeatureContainer />
         ) : (
           <NotRegister />
         )}

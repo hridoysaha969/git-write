@@ -3,20 +3,23 @@ import Preview from "@/components/Preview";
 import SidebarPageHeader from "@/components/SidebarPageHeader";
 
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { AuthProvider } from "@/contexts/AuthContext";
 import { SectionProvider } from "@/contexts/SectionContext";
 
 export default function Page() {
   return (
     <SectionProvider>
-      <SidebarProvider>
-        <AppSidebar />
+      <AuthProvider>
+        <SidebarProvider>
+          <AppSidebar />
 
-        <SidebarInset>
-          <SidebarPageHeader />
+          <SidebarInset>
+            <SidebarPageHeader />
 
-          <Preview />
-        </SidebarInset>
-      </SidebarProvider>
+            <Preview />
+          </SidebarInset>
+        </SidebarProvider>
+      </AuthProvider>
     </SectionProvider>
   );
 }

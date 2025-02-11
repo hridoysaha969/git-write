@@ -7,6 +7,8 @@ import { sendVerificationEmail } from "@/utils/sendEmail";
 
 export async function POST(req) {
   const payload = await req.json();
+  console.log(payload);
+
   await dbConnect();
   const { name, email, password, type, aggrement } = payload;
 
@@ -29,6 +31,50 @@ export async function POST(req) {
         { status: 400 }
       );
     }
+
+    const user = await User.findOne({ email: email });
+
+    if (!user) {
+      return NextResponse.json(
+        { message: "Invalid email", success: false },
+        { status: 401 }
+      );
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return NextResponse.json(
+        { message: "Invalid password", success: false },
+        { status: 401 }
+      );
+    }
+    // Update last login date
+    user.lastLogin = new Date();
+    await user.save();
+
+    const token = jwt.sign(
+      {
+        email: user.email,
+        userID: user.name,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "15d" }
+    );
+
+    const response = NextResponse.json(
+      { token, message: "Logged in successfully", success: true },
+      { status: 200 }
+    );
+
+    response.cookies.set("_user_session_token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      maxAge: 3600 * 24 * 15, // 15 days
+      sameSite: "strict",
+      path: "/",
+    });
+
+    return response;
   } else if (type === "sign-up") {
     if (!name || !email || !password) {
       return NextResponse.json(

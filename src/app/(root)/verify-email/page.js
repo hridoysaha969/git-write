@@ -31,6 +31,10 @@ const VerifyEmail = async ({ searchParams }) => {
 
   const isVerified = await verifyEmail(token);
 
+  if (!isVerified) {
+    notFound();
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
       <div className="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full text-center">

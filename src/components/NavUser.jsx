@@ -26,10 +26,14 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
+import Credits from "./Credits";
 
 export function NavUser() {
   const { isMobile } = useSidebar();
   const user = false;
+
+  const { currentUser, signout } = useAuth();
 
   return (
     <SidebarMenu>
@@ -41,19 +45,22 @@ export function NavUser() {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage
-                  src={user ? user.avatar : "/user.png"}
-                  className="rounded-full"
-                  alt={user.name}
-                />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                {currentUser ? (
+                  <AvatarFallback className="rounded-full bg-gradient-to-r from-[#FF512F] to-[#DD2476] font-bold text-white">
+                    {currentUser.name.charAt(0)}
+                  </AvatarFallback>
+                ) : (
+                  <AvatarFallback className="rounded-full bg-zinc-300 font-bold text-zinc-800">
+                    G
+                  </AvatarFallback>
+                )}
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">
-                  {user ? user.name : "Guest"}
+                  {currentUser ? currentUser.name : "Guest"}
                 </span>
                 <span className="truncate text-xs">
-                  {user ? user.email : "Welcome to GitWrite"}
+                  {currentUser ? currentUser.email : "Welcome to GitWrite"}
                 </span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
@@ -68,28 +75,22 @@ export function NavUser() {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage
-                    src={user ? user.avatar : "/user.png"}
-                    alt={user ? user.name : "Guest"}
-                    className="rounded-full"
-                  />
-                  <AvatarFallback className="rounded-lg">G</AvatarFallback>
+                  {currentUser ? (
+                    <AvatarFallback className="rounded-full bg-gradient-to-r from-[#FF512F] to-[#DD2476] font-bold text-white">
+                      {currentUser.name.charAt(0)}
+                    </AvatarFallback>
+                  ) : (
+                    <AvatarFallback className="rounded-full bg-zinc-300 font-bold text-zinc-800">
+                      G
+                    </AvatarFallback>
+                  )}
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">
-                    {user ? user.name : "Guest"}
+                    {currentUser ? currentUser.name : "Guest"}
                   </span>
                   <span className="truncate text-xs">
-                    {user ? (
-                      <>
-                        <span>Credit: </span>
-                        <span className="text-zinc-800 font-semibold">
-                          {user.credit}
-                        </span>
-                      </>
-                    ) : (
-                      "Sign up to access"
-                    )}
+                    {currentUser ? <Credits /> : "Sign up to access"}
                   </span>
                 </div>
               </div>
@@ -97,13 +98,15 @@ export function NavUser() {
 
             <DropdownMenuSeparator />
 
-            {user ? (
+            {currentUser ? (
               <>
                 {" "}
                 <DropdownMenuGroup>
                   <DropdownMenuItem>
-                    <Sparkles />
-                    Upgrade to Pro
+                    <Link href="/pricing" className="flex items-center gap-2">
+                      <Sparkles className="w-4 h-4" />
+                      Upgrade to Pro
+                    </Link>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
@@ -114,7 +117,7 @@ export function NavUser() {
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={signout} className="cursor-pointer">
                   <LogOut />
                   Log out
                 </DropdownMenuItem>{" "}

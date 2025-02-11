@@ -1,3 +1,5 @@
+import { AuthProvider } from "@/contexts/AuthContext";
+
 export const metadata = {
   title: "Sign In - Access Your Account | GitWrite",
   description:
@@ -37,5 +39,9 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  return <main>{children}</main>;
+  return (
+    <main>
+      <AuthProvider>{children}</AuthProvider>{" "}
+    </main>
+  );
 }

@@ -7,15 +7,19 @@ import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
+import { cn } from "@/lib/utils";
 
 export default function Form({ type }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [aggrement, setAggrement] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
+  const { signUp, signIn } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,52 +27,34 @@ export default function Form({ type }) {
 
     if (type === "sign-in") {
       if (email.trim() === "" || password.trim() === "") {
-        setError("Required fields are missing");
+        setError(true);
         return;
       }
 
-      console.log({ email, password });
+      signIn(email, password, type);
       setEmail("");
       setPassword("");
+      setLoading(false);
+      setError(false);
     } else {
       if (name.trim() === "" || email.trim() === "" || password.trim() === "") {
-        setError("Required fields are missing");
-        toast({
-          variant: "destructive",
-          title: "Required fields are missing",
-          description: "Please enter valid email and strong password!",
-        });
+        setError(true);
+        // toast({
+        //   variant: "destructive",
+        //   title: "Required fields are missing",
+        //   description: "Please enter valid email and strong password!",
+        // });
         setLoading(false);
         return;
       }
 
-      const response = await fetch("/api/auth", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, password, type, aggrement: true }),
-        redirect: "follow",
-      });
+      signUp(name, email, password, type, aggrement);
 
-      const data = await response.json();
-      if (!data.success) {
-        setError(data.message);
-        toast({
-          variant: "destructive",
-          title: data.message,
-          description:
-            "Something went wrong while signing up! Please try again.",
-        });
-        setLoading(false);
-        return;
-      }
       setName("");
       setEmail("");
       setPassword("");
       setLoading(false);
-
-      console.log(data);
+      setError(false);
 
       toast({
         title: "Signup Successful!",
@@ -76,16 +62,10 @@ export default function Form({ type }) {
           "Please verify your email. We've sent you a verification email. Don't forget to check spam folder.",
       });
     }
-    router.push("/generate");
   };
 
   return (
     <div className="flex flex-col items-center px-2 justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      {/* {error && (
-        <div className="py-2 px-4 bg-red-300 text-red-800 font-semibold rounded-md mb-4">
-          {error}
-        </div>
-      )} */}
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -104,11 +84,24 @@ export default function Form({ type }) {
               <input
                 type="name"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  setError(true);
+                }}
                 placeholder="Enter your full name"
-                className="mt-1 w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                className={cn(
+                  "mt-1 w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500",
+                  {
+                    "focus:ring-2 focus:ring-red-500": error && !name,
+                  }
+                )}
                 required
               />
+              {error && !name && (
+                <span className="text-xs text-red-500">
+                  Please enter your name!
+                </span>
+              )}
             </div>
           )}
 
