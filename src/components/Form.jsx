@@ -62,6 +62,8 @@ export default function Form({ type }) {
           "Please verify your email. We've sent you a verification email. Don't forget to check spam folder.",
       });
     }
+
+    router.push("/generate");
   };
 
   return (
