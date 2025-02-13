@@ -7,7 +7,6 @@ import { sendVerificationEmail } from "@/utils/sendEmail";
 
 export async function POST(req) {
   const payload = await req.json();
-  console.log(payload);
 
   await dbConnect();
   const { name, email, password, type, aggrement } = payload;

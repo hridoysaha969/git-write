@@ -36,6 +36,7 @@ export default function Form({ type }) {
       setPassword("");
       setLoading(false);
       setError(false);
+      router.push("/generate");
     } else {
       if (name.trim() === "" || email.trim() === "" || password.trim() === "") {
         setError(true);
@@ -55,6 +56,7 @@ export default function Form({ type }) {
       setPassword("");
       setLoading(false);
       setError(false);
+      router.push("/generate");
 
       toast({
         title: "Signup Successful!",
@@ -62,8 +64,6 @@ export default function Form({ type }) {
           "Please verify your email. We've sent you a verification email. Don't forget to check spam folder.",
       });
     }
-
-    router.push("/generate");
   };
 
   return (

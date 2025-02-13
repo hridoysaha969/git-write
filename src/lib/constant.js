@@ -185,6 +185,17 @@ _Name the technologies used in the project._
 
 ![Logo](https://gitwrite.vercel.app/link-logo.png)`,
   },
+  {
+    tab_id: "env_variables",
+    title: "Environment Variables",
+    code: `## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+\`API_KEY\`
+
+\`ANOTHER_API_KEY\``,
+  },
 ];
 
 export const VERSION = ["free", "pro"];

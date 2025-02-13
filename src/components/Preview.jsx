@@ -33,7 +33,7 @@ const Preview = () => {
           />
         </div>
         <div className="lg:w-1/2 w-full shadow-md p-3">
-          <h4>Preview</h4>
+          <h4 className="text-blue-500">Preview</h4>
           {/* Preview */}
           <div className="w-full p-3 rounded-sm h-[300px] md:h-[500px] overflow-y-auto markdown">
             <ReactMarkdown

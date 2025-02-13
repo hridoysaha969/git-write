@@ -45,6 +45,7 @@ export function AuthProvider({ children }) {
         title: data.message,
         description: "Something went wrong while signing up! Please try again.",
       });
+      return;
     }
 
     if (data?.user) {
@@ -72,15 +73,11 @@ export function AuthProvider({ children }) {
         title: response.message,
         description: "Something went wrong while signing in! Please try again.",
       });
+      return;
     }
 
-    if (response?.user) {
+    if (response && response?.user) {
       setCurrentUser(response.user);
-      toast({
-        title: "Sign in Successful!",
-        description:
-          "Now you can access our premium basic feture. Enjoy creating README!",
-      });
       router.push("/generate");
     }
   };
@@ -100,7 +97,11 @@ export function AuthProvider({ children }) {
     signout,
   };
 
-  return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={values}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 }
 
 // Hook to use auth context

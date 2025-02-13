@@ -9,17 +9,17 @@ import { SectionProvider } from "@/contexts/SectionContext";
 export default function Page() {
   return (
     <SectionProvider>
-      <AuthProvider>
-        <SidebarProvider>
+      <SidebarProvider>
+        <AuthProvider>
           <AppSidebar />
+        </AuthProvider>
 
-          <SidebarInset>
-            <SidebarPageHeader />
+        <SidebarInset>
+          <SidebarPageHeader />
 
-            <Preview />
-          </SidebarInset>
-        </SidebarProvider>
-      </AuthProvider>
+          <Preview />
+        </SidebarInset>
+      </SidebarProvider>
     </SectionProvider>
   );
 }
