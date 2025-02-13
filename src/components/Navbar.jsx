@@ -32,6 +32,7 @@ const Navbar = () => {
         <button
           className="block sm:hidden font-semibold outline-none focus:outline-none"
           onClick={() => setOpen(!open)}
+          aria-label="Close menu"
         >
           {open ? (
             <X className="w-6 h-6" />

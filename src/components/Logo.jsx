@@ -13,6 +13,7 @@ const Logo = () => {
         src="/gitwrite_logo.png"
         alt="GitWrite Logo"
         className="md:w-10 w-8 md:h-10 h-8 rounded-full"
+        loading="lazy"
       />
       <h1 className="font-bold md:text-3xl text-xl dark:text-white text-zinc-900">
         Git

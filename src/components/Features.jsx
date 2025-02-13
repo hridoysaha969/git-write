@@ -4,10 +4,10 @@ export default function Features() {
   return (
     <section className="py-16">
       <div className="max-w-6xl mx-auto text-center px-6">
-        <h2 className="text-2xl md:text-4xl text-zinc-500 font-bold mb-6">
+        <h2 className="text-2xl md:text-4xl text-zinc-800 font-bold mb-6">
           Powerful Features for Effortless README Generation
         </h2>
-        <p className="text-lg text-zinc-400 mb-12">
+        <p className="text-lg text-zinc-600 mb-12">
           Simplify your workflow with AI-powered suggestions, customization
           options, and seamless downloads.
         </p>
@@ -42,8 +42,8 @@ function FeatureCard({ icon, title, description }) {
   return (
     <div className="bg-slate-50 p-6 rounded-2xl shadow-lg text-start hover:bg-slate-100 transition duration-300">
       <div className="text-4xl text-blue-400 mb-4">{icon}</div>
-      <h3 className="text-xl text-zinc-600 font-semibold mb-2">{title}</h3>
-      <p className="text-zinc-400">{description}</p>
+      <h3 className="text-xl text-zinc-800 font-semibold mb-2">{title}</h3>
+      <p className="text-zinc-600">{description}</p>
     </div>
   );
 }
