@@ -3,6 +3,7 @@
 import {
   BookOpen,
   ChevronsUpDown,
+  Loader2,
   LogIn,
   LogOut,
   Sparkles,
@@ -31,41 +32,49 @@ import Credits from "./Credits";
 
 export function NavUser() {
   const { isMobile } = useSidebar();
-  const user = false;
 
-  const { currentUser, signout } = useAuth();
+  const { currentUser, signout, loading } = useAuth();
 
   return (
     <SidebarMenu>
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <Avatar className="h-8 w-8 rounded-lg">
-                {currentUser ? (
-                  <AvatarFallback className="rounded-full bg-gradient-to-r from-[#FF512F] to-[#DD2476] font-bold text-white">
-                    {currentUser.name.charAt(0)}
-                  </AvatarFallback>
-                ) : (
-                  <AvatarFallback className="rounded-full bg-zinc-300 font-bold text-zinc-800">
-                    G
-                  </AvatarFallback>
-                )}
-              </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">
-                  {currentUser ? currentUser.name : "Guest"}
-                </span>
-                <span className="truncate text-xs">
-                  {currentUser ? currentUser.email : "Welcome to GitWrite"}
-                </span>
-              </div>
-              <ChevronsUpDown className="ml-auto size-4" />
-            </SidebarMenuButton>
+            {loading ? (
+              <DropdownMenuGroup>
+                <div className="py-2 px-3 w-full flex items-center justify-center">
+                  <Loader2 className="w-4 h-4 animate-spin" />{" "}
+                </div>
+              </DropdownMenuGroup>
+            ) : (
+              <SidebarMenuButton
+                size="lg"
+                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              >
+                <Avatar className="h-8 w-8 rounded-lg">
+                  {currentUser ? (
+                    <AvatarFallback className="rounded-full bg-gradient-to-r from-[#FF512F] to-[#DD2476] font-bold text-white">
+                      {currentUser.name.charAt(0)}
+                    </AvatarFallback>
+                  ) : (
+                    <AvatarFallback className="rounded-full bg-zinc-300 font-bold text-zinc-800">
+                      G
+                    </AvatarFallback>
+                  )}
+                </Avatar>
+                <div className="grid flex-1 text-left text-sm leading-tight">
+                  <span className="truncate font-semibold">
+                    {currentUser ? currentUser.name : "Guest"}
+                  </span>
+                  <span className="truncate text-xs">
+                    {currentUser ? currentUser.email : "Welcome to GitWrite"}
+                  </span>
+                </div>
+                <ChevronsUpDown className="ml-auto size-4" />
+              </SidebarMenuButton>
+            )}
           </DropdownMenuTrigger>
+
           <DropdownMenuContent
             className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
             side={isMobile ? "bottom" : "right"}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "./ui/button";
@@ -19,7 +19,11 @@ export default function Form({ type }) {
   const [error, setError] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
-  const { signUp, signIn } = useAuth();
+  const { signUp, signIn, currentUser } = useAuth();
+
+  useEffect(() => {
+    if (currentUser) router.push("/generate");
+  }, [currentUser]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

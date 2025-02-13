@@ -28,55 +28,60 @@ export function AuthProvider({ children }) {
 
   //   Signup function
   const signUp = async (name, email, password, type, aggrement) => {
-    const response = await fetch("/api/auth", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email, password, type, aggrement }),
-      redirect: "follow",
-    });
-    const data = await response.json();
-    if (!data.success) {
-      toast({
-        variant: "destructive",
-        title: data.message,
-        description: "Something went wrong while signing up! Please try again.",
+    try {
+      const response = await fetch("/api/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password, type, aggrement }),
       });
-      return;
-    }
-
-    if (data?.user) {
-      setCurrentUser(data.user);
-      router.push("/generate");
+      const data = await response.json();
+      if (data.success) {
+        if (data.user) {
+          setCurrentUser(data.user);
+          router.push("/generate");
+        }
+      } else {
+        toast({
+          variant: "destructive",
+          title: data.message,
+          description:
+            "Something went wrong while signing up! Please try again.",
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
   //   Sign in function
   const signIn = async (email, password, type) => {
-    let response = await fetch("/api/auth", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password, type }),
-      redirect: "follow",
-    });
-    response = await response.json();
-    console.log(response);
-
-    if (!response.success) {
-      toast({
-        variant: "destructive",
-        title: response.message,
-        description: "Something went wrong while signing in! Please try again.",
+    try {
+      let response = await fetch("/api/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password, type }),
       });
-      return;
-    }
+      response = await response.json();
 
-    if (response && response?.user) {
-      setCurrentUser(response.user);
-      router.push("/generate");
+      if (response.success) {
+        if (response.user) {
+          setCurrentUser(response.user);
+          router.push("/generate");
+        }
+      } else {
+        toast({
+          variant: "destructive",
+          title: response.message,
+          description:
+            "Something went wrong while signing in! Please try again.",
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -84,7 +89,7 @@ export function AuthProvider({ children }) {
   const signout = async () => {
     await fetch("/api/auth/sign-out", { method: "POST" });
     setCurrentUser(null);
-    router.push("/"); // Redirect to home after logout
+    router.push("/sign-in"); // Redirect to home after logout
   };
 
   const values = {

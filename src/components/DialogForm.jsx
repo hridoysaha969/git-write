@@ -12,12 +12,63 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import { Check, CheckSquare } from "lucide-react";
 import TagsInput from "./Tags";
+import { cn } from "@/lib/utils";
+
+const template = (projectData) => {
+  return `Generate a professional GitHub README file in Markdown format based on the following project details:
+ 
+- **Project Name:** ${projectData.title}  
+- **Description:** ${projectData.description}  
+- **Tech Stack:** ${projectData.technologies}  
+${projectData.features && `- **Features:** ${projectData.features}`}
+
+Respond strictly in valid Markdown format with proper headings, bullet points, and code blocks where needed. **Do not** include any introductory or closing statements—only the raw README content.`;
+};
 
 const DialogForm = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const [projectData, setProjectData] = useState({
+    title: "",
+    description: "",
+    technologies: "",
+    features: "",
+  });
+  const [tags, setTags] = useState([]);
+  const [error, setError] = useState(false);
+
+  const handleChange = (e) => {
+    setProjectData({
+      ...projectData,
+      [e.target.name]: e.target.value,
+    });
+    setError(false);
+  };
+
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
+
+  const handleSubmit = async () => {
+    const { title, description, technologies, features } = projectData;
+    if (
+      title.trim() === "" ||
+      description.trim() === "" ||
+      technologies.trim() === ""
+    ) {
+      setError(true);
+      return;
+    }
+
+    console.log(template(projectData));
+    setProjectData({
+      title: "",
+      description: "",
+      technologies: "",
+      features: "",
+    });
+    setTags([]);
+  };
+
   return (
     <Dialog>
       <p className="text-xs text-zinc-600 text-center mb-4">
@@ -42,8 +93,17 @@ const DialogForm = () => {
             </label>
             <input
               type="text"
+              name="title"
+              value={projectData.title}
               id="name"
-              className="mt-1 w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={cn(
+                "mt-1 w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500",
+                {
+                  "focus:ring-red-500 border border-red-500":
+                    error && !projectData.title,
+                }
+              )}
+              onChange={handleChange}
             />
           </div>
           <div className="flex flex-col">
@@ -52,11 +112,27 @@ const DialogForm = () => {
             </label>
             <textarea
               id="username"
-              className="mt-1 w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              name="description"
+              value={projectData.description}
+              className={cn(
+                "mt-1 w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500",
+                {
+                  "focus:ring-red-500 border border-red-500":
+                    error && !projectData.description,
+                }
+              )}
+              onChange={handleChange}
             />
           </div>
 
-          <TagsInput />
+          <TagsInput
+            projectData={projectData}
+            setProjectData={setProjectData}
+            tags={tags}
+            setTags={setTags}
+            error={error}
+            setError={setError}
+          />
 
           <div className="flex items-center space-x-2">
             <div
@@ -85,15 +161,20 @@ const DialogForm = () => {
               </label>
               <textarea
                 id="username"
+                name="features"
+                value={projectData.features}
                 className="mt-1 w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter key features, separated by commas."
+                onChange={handleChange}
               />
             </div>
           )}
         </div>
 
         <DialogFooter>
-          <Button type="submit">Generate</Button>
+          <Button type="submit" onClick={handleSubmit}>
+            Generate
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

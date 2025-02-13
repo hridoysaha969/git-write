@@ -1,14 +1,22 @@
+import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
 import { useState } from "react";
 
-const TagsInput = () => {
+const TagsInput = ({
+  projectData,
+  setProjectData,
+  tags,
+  setTags,
+  error,
+  setError,
+}) => {
   const [inputValue, setInputValue] = useState(""); // Stores the current input value
-  const [tags, setTags] = useState([]); // Stores the list of tags
-  const [tagsString, setTagsString] = useState(""); // Stores the tags as a comma-separated string
+  // const [tags, setTags] = useState([]); // Stores the list of tags
 
   // Handle input change
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
+    setError(false);
   };
 
   // Handle key press (Enter to add tag)
@@ -17,7 +25,10 @@ const TagsInput = () => {
       e.preventDefault(); // Prevent form submission
       const newTags = [...tags, inputValue.trim()]; // Add new tag to the list
       setTags(newTags); // Update tags list
-      setTagsString(newTags.join(", ")); // Update tags as a comma-separated string
+      setProjectData({
+        ...projectData,
+        technologies: newTags.join(", "),
+      }); // Update tags as a comma-separated string
       setInputValue(""); // Clear input field
     }
   };
@@ -26,7 +37,10 @@ const TagsInput = () => {
   const handleRemoveTag = (index) => {
     const newTags = tags.filter((_, i) => i !== index); // Remove the tag at the specified index
     setTags(newTags); // Update tags list
-    setTagsString(newTags.join(", ")); // Update tags as a comma-separated string
+    setProjectData({
+      ...projectData,
+      technologies: newTags.join(", "),
+    }); // Update tags as a comma-separated string
   };
 
   return (
@@ -40,7 +54,13 @@ const TagsInput = () => {
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}
         placeholder="Type a tag and press Enter"
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className={cn(
+          "w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500",
+          {
+            "focus:ring-red-500 border border-red-500":
+              error && !projectData.technologies,
+          }
+        )}
       />
 
       {/* Display Tags */}
