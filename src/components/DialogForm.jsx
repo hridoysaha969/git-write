@@ -70,7 +70,7 @@ const DialogForm = () => {
               {isChecked && <Check className="w-full h-full text-white" />}
             </div>
             <label
-              className={`text-lg font-medium ${
+              className={`text-sm font-medium ${
                 isChecked ? "text-zinc-800" : "text-zinc-500"
               }`}
             >

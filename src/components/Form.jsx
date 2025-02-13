@@ -31,12 +31,11 @@ export default function Form({ type }) {
         return;
       }
 
-      signIn(email, password, type);
+      await signIn(email, password, type);
       setEmail("");
       setPassword("");
       setLoading(false);
       setError(false);
-      router.push("/generate");
     } else {
       if (name.trim() === "" || email.trim() === "" || password.trim() === "") {
         setError(true);
@@ -49,14 +48,13 @@ export default function Form({ type }) {
         return;
       }
 
-      signUp(name, email, password, type, aggrement);
+      await signUp(name, email, password, type, aggrement);
 
       setName("");
       setEmail("");
       setPassword("");
       setLoading(false);
       setError(false);
-      router.push("/generate");
 
       toast({
         title: "Signup Successful!",

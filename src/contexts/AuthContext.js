@@ -26,8 +26,6 @@ export function AuthProvider({ children }) {
     fetchUser();
   }, []);
 
-  console.log(currentUser);
-
   //   Signup function
   const signUp = async (name, email, password, type, aggrement) => {
     const response = await fetch("/api/auth", {
@@ -97,11 +95,7 @@ export function AuthProvider({ children }) {
     signout,
   };
 
-  return (
-    <AuthContext.Provider value={values}>
-      {!loading && children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 }
 
 // Hook to use auth context
