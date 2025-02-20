@@ -16,6 +16,7 @@ const template = (projectData) => {
 - **Tech Stack:** ${projectData.technologies}  
 ${projectData.features && `- **Features:** ${projectData.features}`}
 
+Add necessary emoji if needed. You can add other fields if needed according to this description.
 Respond strictly in valid Markdown format with proper headings, bullet points, and code blocks where needed. **Do not** include any introductory or closing statements—only the raw README content.`;
 };
 
