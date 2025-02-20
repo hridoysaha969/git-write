@@ -20,6 +20,18 @@ Add necessary emoji if needed. You can add other fields if needed according to t
 Respond strictly in valid Markdown format with proper headings, bullet points, and code blocks where needed. **Do not** include any introductory or closing statements—only the raw README content.`;
 };
 
+async function verifyToken(token) {
+  try {
+    const { payload } = await jwtVerify(
+      token,
+      new TextEncoder().encode(process.env.JWT_SECRET)
+    );
+    return payload.email || null;
+  } catch {
+    return null;
+  }
+}
+
 export async function POST(req) {
   const payload = await req.json();
   const cookieStore = await cookies();
@@ -49,67 +61,91 @@ export async function POST(req) {
 
   // Authorization Validation
   try {
-    const { payload } = await jwtVerify(
-      token,
-      new TextEncoder().encode(process.env.JWT_SECRET)
-    );
-    if (!payload.email) {
+    const email = await verifyToken(token);
+    if (!email) {
       return NextResponse.json(
-        { message: "Invalid user token!", success: false },
+        { message: "Unauthorize user!", success: false },
         { status: 400 }
       );
     }
 
-    try {
-      const user = await User.findOne({ email: payload.email });
-      if (user.credits < 1) {
-        return NextResponse.json(
-          {
-            message: "Insufficient credits! Please upgrade your plan.",
-            success: false,
-          },
-          { status: 400 }
-        );
-      }
-      if (!user.isVerified) {
-        return NextResponse.json(
-          {
-            message:
-              "User email is not verified. Please verify your email and try again.",
-            success: false,
-          },
-          { status: 400 }
-        );
-      }
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      const result = await model.generateContent(
-        template({ title, description, technologies })
-      );
-      const responseText = result.response.text();
+    // Find and update the user in one query to reduce DB calls
+    const user = await User.findOneAndUpdate(
+      { email, credits: { $gte: 1 }, isVerified: true }, // Ensure user has credits and is verified
+      { $inc: { credits: -1 } }, // Decrease credits
+      { new: true } // Return updated user
+    );
 
-      const updateUser = await User.findOneAndUpdate(
-        { email: payload.email },
-        { credits: user.credits - 1 }
-      );
-      if (!updateUser) {
-        return NextResponse.json(
-          { mesage: "Error updating credits. Try Again!", success: false },
-          { status: 400 }
-        );
-      }
-
-      return NextResponse.json({
-        success: true,
-        readme: responseText,
-      });
-    } catch (error) {
-      console.error("Gemini API Error:", error);
+    if (!user) {
       return NextResponse.json(
-        { success: false, error: error.message },
-        { status: 500 }
+        {
+          message: "Insufficient credits or email not verified!",
+          success: false,
+        },
+        { status: 400 }
       );
     }
+
+    // Generate README using Gemini API
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const result = await model.generateContent(
+      template({ title, description, technologies })
+    );
+
+    // Extract response text safely
+    const responseText = result?.response?.text() || "No response generated.";
+    return NextResponse.json({ success: true, readme: responseText });
+    // try {
+    //   const user = await User.findOne({ email: payload.email });
+    //   if (user.credits < 1) {
+    //     return NextResponse.json(
+    //       {
+    //         message: "Insufficient credits! Please upgrade your plan.",
+    //         success: false,
+    //       },
+    //       { status: 400 }
+    //     );
+    //   }
+    //   if (!user.isVerified) {
+    //     return NextResponse.json(
+    //       {
+    //         message:
+    //           "User email is not verified. Please verify your email and try again.",
+    //         success: false,
+    //       },
+    //       { status: 400 }
+    //     );
+    //   }
+    //   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    //   const result = await model.generateContent(
+    //     template({ title, description, technologies })
+    //   );
+    //   const responseText = result.response.text();
+
+    //   const updateUser = await User.findOneAndUpdate(
+    //     { email: payload.email },
+    //     { credits: user.credits - 1 }
+    //   );
+    //   if (!updateUser) {
+    //     return NextResponse.json(
+    //       { mesage: "Error updating credits. Try Again!", success: false },
+    //       { status: 400 }
+    //     );
+    //   }
+
+    //   return NextResponse.json({
+    //     success: true,
+    //     readme: responseText,
+    //   });
+    // } catch (error) {
+    //   console.error("Gemini API Error:", error);
+    //   return NextResponse.json(
+    //     { success: false, error: error.message },
+    //     { status: 500 }
+    //   );
+    // }
   } catch (error) {
+    console.error("API Error:", error);
     return NextResponse.json(
       { message: error.message, success: false },
       { status: 500 }
