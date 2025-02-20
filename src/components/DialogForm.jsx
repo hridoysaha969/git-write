@@ -13,17 +13,7 @@ import { useState } from "react";
 import { Check, CheckSquare } from "lucide-react";
 import TagsInput from "./Tags";
 import { cn } from "@/lib/utils";
-
-const template = (projectData) => {
-  return `Generate a professional GitHub README file in Markdown format based on the following project details:
- 
-- **Project Name:** ${projectData.title}  
-- **Description:** ${projectData.description}  
-- **Tech Stack:** ${projectData.technologies}  
-${projectData.features && `- **Features:** ${projectData.features}`}
-
-Respond strictly in valid Markdown format with proper headings, bullet points, and code blocks where needed. **Do not** include any introductory or closing statements—only the raw README content.`;
-};
+import { useSections } from "@/contexts/SectionContext";
 
 const DialogForm = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -35,6 +25,8 @@ const DialogForm = () => {
   });
   const [tags, setTags] = useState([]);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { setReadmeContent } = useSections();
 
   const handleChange = (e) => {
     setProjectData({
@@ -49,6 +41,7 @@ const DialogForm = () => {
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
     const { title, description, technologies, features } = projectData;
     if (
       title.trim() === "" ||
@@ -57,9 +50,25 @@ const DialogForm = () => {
     ) {
       setError(true);
       return;
+    } else if (isChecked && features.trim() === "") {
+      setError(true);
+      return;
     }
 
-    console.log(template(projectData));
+    const res = await fetch("/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(projectData),
+    });
+    const data = await res.json();
+
+    // console.log(data.readme);
+    if (data.readme) {
+      setReadmeContent(data.readme);
+    } else {
+      console.log(data.message);
+    }
+
     setProjectData({
       title: "",
       description: "",
@@ -67,6 +76,9 @@ const DialogForm = () => {
       features: "",
     });
     setTags([]);
+    setIsChecked(false);
+    setError(false);
+    setLoading(false);
   };
 
   return (
@@ -150,7 +162,7 @@ const DialogForm = () => {
                 isChecked ? "text-zinc-800" : "text-zinc-500"
               }`}
             >
-              Are there any key features of this project?
+              Want to add key feature!
             </label>
           </div>
 
@@ -172,7 +184,12 @@ const DialogForm = () => {
         </div>
 
         <DialogFooter>
-          <Button type="submit" onClick={handleSubmit}>
+          <Button
+            type="submit"
+            onClick={handleSubmit}
+            disabled={loading}
+            className="disabled:bg-gray-400"
+          >
             Generate
           </Button>
         </DialogFooter>

@@ -21,10 +21,6 @@ export default function Form({ type }) {
   const { toast } = useToast();
   const { signUp, signIn, currentUser } = useAuth();
 
-  useEffect(() => {
-    if (currentUser) router.push("/generate");
-  }, [currentUser]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -40,6 +36,7 @@ export default function Form({ type }) {
       setPassword("");
       setLoading(false);
       setError(false);
+      console.log(currentUser);
     } else {
       if (name.trim() === "" || email.trim() === "" || password.trim() === "") {
         setError(true);
