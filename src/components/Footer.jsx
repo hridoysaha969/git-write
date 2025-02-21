@@ -3,8 +3,8 @@ import Link from "next/link";
 const Footer = () => {
   const date = new Date();
   return (
-    <footer className="bg-zinc-900 py-8 text-center">
-      <div className="container">
+    <footer className="bg-zinc-900 py-6">
+      <div className="container flex justify-between items-center">
         <p className="text-white text-sm">
           &copy; All rights reserved {date.getFullYear()} |{" "}
           <Link
@@ -14,6 +14,12 @@ const Footer = () => {
             Hridoy Saha
           </Link>{" "}
         </p>
+
+        <div>
+          <Link href="/privacy-policy" className="text-xs text-white">
+            Privacy & Policy
+          </Link>
+        </div>
       </div>
     </footer>
   );

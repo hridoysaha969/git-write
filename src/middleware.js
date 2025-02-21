@@ -9,6 +9,10 @@ export async function middleware(request) {
 
   const token = tokenCookie?.value || "";
 
+  if (!token && url.includes("/my-readme")) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
   if (token) {
     try {
       const { payload } = await jwtVerify(
