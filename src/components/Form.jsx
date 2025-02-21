@@ -36,7 +36,6 @@ export default function Form({ type }) {
       setPassword("");
       setLoading(false);
       setError(false);
-      console.log(currentUser);
     } else {
       if (name.trim() === "" || email.trim() === "" || password.trim() === "") {
         setError(true);

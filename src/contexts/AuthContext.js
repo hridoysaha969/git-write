@@ -51,7 +51,12 @@ export function AuthProvider({ children }) {
         });
       }
     } catch (error) {
-      console.log(error.message);
+      toast({
+        variant: "destructive",
+        title: error.message,
+        description:
+          "Something went wrong while requesting to server! Please try again.",
+      });
     }
   };
 
@@ -66,9 +71,10 @@ export function AuthProvider({ children }) {
         body: JSON.stringify({ email, password, type }),
       });
       response = await response.json();
-
       if (response.success) {
         if (response.user) {
+          console.log(response.user);
+
           setCurrentUser(response.user);
           router.push("/generate");
         }

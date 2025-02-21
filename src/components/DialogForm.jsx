@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
 import { useState } from "react";
-import { Check } from "lucide-react";
+import { Check, LoaderCircle } from "lucide-react";
 import TagsInput from "./Tags";
 import { cn } from "@/lib/utils";
 import { useSections } from "@/contexts/SectionContext";
@@ -200,9 +200,10 @@ const DialogForm = () => {
               !projectData.description ||
               !projectData.technologies
             }
-            className="disabled:bg-gray-400"
+            className="disabled:bg-gray-400 flex items-center gap-1"
           >
             Generate
+            {loading && <LoaderCircle className="w-4 h-4 animate-spin" />}
           </Button>
         </DialogFooter>
       </DialogContent>

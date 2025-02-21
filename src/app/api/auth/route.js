@@ -61,7 +61,7 @@ export async function POST(req) {
     );
 
     const response = NextResponse.json(
-      { token, message: "Logged in successfully", success: true },
+      { user, message: "Logged in successfully", success: true },
       { status: 200 }
     );
 
@@ -124,7 +124,7 @@ export async function POST(req) {
       await sendVerificationEmail(email, token);
 
       const response = NextResponse.json(
-        { message: "New user has been created", result: user, success: true },
+        { user, message: "Sign up successfull!", success: true },
         { status: 201 }
       );
       response.cookies.set("_user_session_token", token, {
