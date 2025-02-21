@@ -4,7 +4,7 @@ const Footer = () => {
   const date = new Date();
   return (
     <footer className="bg-zinc-900 py-6">
-      <div className="container flex justify-between items-center">
+      <div className="container flex flex-col md:flex-row gap-2 justify-between items-center">
         <p className="text-white text-sm">
           &copy; All rights reserved {date.getFullYear()} |{" "}
           <Link

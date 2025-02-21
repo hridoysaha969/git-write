@@ -23,19 +23,19 @@ const Preview = () => {
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
       <div className="flex flex-col lg:flex-row gap-4">
-        <div className="lg:w-1/2 w-full shadow-md p-3">
+        <div className="lg:w-1/2 w-full shadow-lg p-3 overflow-hidden">
           <h4>Editor</h4>
           {/* Editor */}
           <textarea
             value={readmeContent}
             onChange={(e) => setReadmeContent(e.target.value)}
-            className="w-full p-3 text-sm font-mono h-[300px] md:h-[500px] bg-zinc-700 text-white"
+            className="w-full p-3 text-sm font-mono h-[300px] md:h-[500px] bg-zinc-700 text-white break-words whitespace-pre-wrap"
           />
         </div>
-        <div className="lg:w-1/2 w-full shadow-md p-3">
+        <div className="lg:w-1/2 max-w-full shadow-lg p-3 overflow-hidden">
           <h4 className="text-blue-500">Preview</h4>
           {/* Preview */}
-          <div className="w-full p-3 rounded-sm h-[300px] md:h-[500px] overflow-y-auto markdown">
+          <div className="w-full p-3 rounded-sm h-[300px] md:h-[500px] markdown overflow-x-hidden">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{

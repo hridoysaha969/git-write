@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Copy, Download, FilePlus } from "lucide-react";
+import { Copy, Download, FilePlus, Scroll } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -39,13 +39,13 @@ const MyReadme = () => {
       <Navbar />
       <div className="max-w-4xl mx-auto p-6 space-y-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-xl md:text-2xl font-bold">📄 My README Files</h1>
+          <h1 className="text-sm md:text-2xl font-bold">📄 My README Files</h1>
           <Button asChild>
             <Link
               href="/generate"
               className="flex items-center gap-2 px-4 py-2 rounded-md shadow-md"
             >
-              <FilePlus size={16} /> Create New
+              <FilePlus className="w-4 h-4" /> Create New
             </Link>
           </Button>
         </div>
@@ -79,7 +79,8 @@ const MyReadme = () => {
               </div>
             ))
           ) : (
-            <div className="text-center py-10 bg-gray-100 dark:bg-gray-800 rounded-md shadow-md">
+            <div className="text-center flex flex-col items-center justify-center py-10 bg-gray-100 dark:bg-gray-800 rounded-md shadow-md">
+              <Scroll className="w-8 h-8 md:w-12 md:h-12 text-zinc-400" />
               <p className="text-lg font-medium text-gray-600 dark:text-gray-300">
                 No README files available.
               </p>

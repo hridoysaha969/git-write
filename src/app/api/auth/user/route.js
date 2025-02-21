@@ -43,8 +43,6 @@ export async function GET() {
       { status: 200 }
     );
   } catch (error) {
-    console.log(error.message);
-
     return NextResponse.json(
       { message: error.message, success: false },
       { status: 500 }

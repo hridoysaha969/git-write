@@ -19,12 +19,12 @@ const Navbar = () => {
           })}
         >
           <li>
-            <Link href="/" className="text-zinc-500 font-semibold">
+            <Link href="/" className="text-zinc-800 font-semibold">
               Home
             </Link>
           </li>
           <li>
-            <Link href="/pricing" className="text-zinc-500 font-semibold">
+            <Link href="/pricing" className="text-zinc-800 font-semibold">
               Pricing
             </Link>
           </li>

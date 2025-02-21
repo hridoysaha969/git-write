@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <header className="text-center py-4 md:py-12 md:mt-8 md:h-[70vh] h-[60vh]">
       <div className="container h-full flex flex-col justify-center items-center relative">
-        <h1 className="text-2xl md:text-5xl font-semibold text-zinc-500">
+        <h1 className="text-2xl md:text-5xl font-semibold text-zinc-800">
           Simplify{" "}
           <span
             className={`${shadowsIntoLight.className} select-none bg-gradient-to-r from-[#FF512F] to-[#DD2476] bg-clip-text text-transparent`}

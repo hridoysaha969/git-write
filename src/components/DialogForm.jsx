@@ -64,7 +64,6 @@ const DialogForm = () => {
     });
     const data = await res.json();
 
-    // console.log(data.readme);
     if (data.readme) {
       setReadmeContent(data.readme);
     } else {

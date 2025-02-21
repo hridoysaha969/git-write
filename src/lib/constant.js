@@ -302,8 +302,7 @@ export const PROJECT = `# [your-project-title] ✨
 
 \`\`\`bash
 # Clone the repository
-git clone 
-https://github.com/username/your-project.git
+git clone https://github.com/username/your-project.git
 
 # Install dependencies
 cd your-app
