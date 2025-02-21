@@ -10,10 +10,11 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
 import { useState } from "react";
-import { Check, CheckSquare } from "lucide-react";
+import { Check } from "lucide-react";
 import TagsInput from "./Tags";
 import { cn } from "@/lib/utils";
 import { useSections } from "@/contexts/SectionContext";
+import { useToast } from "@/hooks/use-toast";
 
 const DialogForm = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -27,6 +28,7 @@ const DialogForm = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const { setReadmeContent } = useSections();
+  const { toast } = useToast();
 
   const handleChange = (e) => {
     setProjectData({
@@ -66,7 +68,12 @@ const DialogForm = () => {
     if (data.readme) {
       setReadmeContent(data.readme);
     } else {
-      console.log(data.message);
+      toast({
+        variant: "destructive",
+        title: data.message,
+        description:
+          "Something went wrong while Generating README! Please try again.",
+      });
     }
 
     setProjectData({
@@ -187,7 +194,12 @@ const DialogForm = () => {
           <Button
             type="submit"
             onClick={handleSubmit}
-            disabled={loading}
+            disabled={
+              loading ||
+              !projectData.title ||
+              !projectData.description ||
+              !projectData.technologies
+            }
             className="disabled:bg-gray-400"
           >
             Generate

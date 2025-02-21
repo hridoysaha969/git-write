@@ -121,8 +121,10 @@ export function NavUser() {
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                   <DropdownMenuItem>
-                    <BookOpen />
-                    My README
+                    <Link href="/my-readme" className="flex items-center gap-2">
+                      <BookOpen className="w-4 h-4" />
+                      My README
+                    </Link>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />

@@ -22,6 +22,9 @@ export async function middleware(request) {
       if (payload.email && url.includes("/sign-up")) {
         return NextResponse.redirect(new URL("/generate", request.url));
       }
+      if (!payload.email && url.includes("/my-readme")) {
+        return NextResponse.redirect(new URL("/", request.url));
+      }
     } catch (error) {
       console.log("verification failed!", error.message);
       if (error && url.includes("/sign-in")) {

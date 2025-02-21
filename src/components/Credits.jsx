@@ -2,6 +2,7 @@ import { useAuth } from "@/contexts/AuthContext";
 
 const Credits = () => {
   const { currentUser } = useAuth();
+
   return (
     <>
       {currentUser?.isVerified ? (

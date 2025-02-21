@@ -1,9 +1,4 @@
-import {
-  ENTERPRICE_PLAN,
-  FREE_PLAN,
-  PREMIUM_PLAN,
-  STANDARD_PLAN,
-} from "./prices";
+import { ENTERPRICE_PLAN, PREMIUM_PLAN, STANDARD_PLAN } from "./prices";
 
 export const SECTIONS = [
   {
@@ -214,7 +209,8 @@ export const PLANS = [
   {
     title: "Starter",
     price: STANDARD_PLAN,
-    description: "Perfect for small projects and personal use.",
+    description:
+      "Ideal for personal projects and continuous professional development.",
     features: [
       "100 AI-generated README files",
       "Basic formatting",
@@ -245,20 +241,91 @@ export const PLANS = [
   },
 ];
 
-const data = [
-  {
-    slug: "get-started",
-    title: "Get Started",
-    description: "This is Get Started description.",
-  },
-  {
-    slug: "my-docs",
-    title: "My Docs",
-    description: "This is My Docs description.",
-  },
-  {
-    slug: "project-overview",
-    title: "Project Overview",
-    description: "This is Project Overview description.",
-  },
-];
+export const PROFILE = `# Hi there! 👋 I'm [Your Name]
+
+🚀 Passionate Developer | 💻 Full-Stack Enthusiast | 🌍 Open-Source Contributor  
+
+![GitHub Banner](https://source.unsplash.com/1600x400/?technology,coding)  
+
+## 🚀 About Me  
+- 🔭 I’m currently working on **[Your Latest Project](https://github.com/yourusername/yourproject)**
+- 🌱 I’m learning **[Technology or Framework]**
+- 👯 I’m looking to collaborate on **Open Source Projects**
+- 💬 Ask me about **Web Development, JavaScript, React, Next.js**
+- 📫 Reach me at **[your.email@example.com](mailto:your.email@example.com)**
+- ⚡ Fun fact: **I love solving coding challenges and exploring new tech!**  
+
+---
+
+## 🛠️ Tech Stack  
+💻 **Languages:** JavaScript, TypeScript, Python  
+🛠️ **Frameworks & Libraries:** React, Next.js, Node.js, Express.js  
+📦 **Databases:** MongoDB, Firebase, PostgreSQL  
+🚀 **Tools & Platforms:** Git, GitHub, VS Code, Docker, Postman  
+🎨 **Design:** Tailwind CSS, Figma  
+
+---
+
+## 📈 GitHub Stats  
+
+[Add your github states here]
+
+---
+
+## 📫 Let's Connect!  
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-blue?style=flat&logo=Linkedin&logoColor=white)](https://linkedin.com/in/yourprofile)  
+[![Twitter](https://img.shields.io/badge/-Twitter-blue?style=flat&logo=Twitter&logoColor=white)](https://twitter.com/yourusername)  
+[![Portfolio](https://img.shields.io/badge/-Portfolio-black?style=flat&logo=web&logoColor=white)](https://yourportfolio.com)  
+
+---
+
+⭐ **Feel free to check out my repositories and contribute!** 🚀
+`;
+export const PROJECT = `# [your-project-title] ✨
+
+[Provide a concise summary of your project, highlighting its purpose and key features]
+
+## Features 🧙‍♂️
+
+- 🚀 [Add your project feature here]
+- 🎨 [Add your project feature here]
+- 🛡️ [Add your project feature here]
+
+## Tech Stack 🛠️
+
+- [Language]
+- [Library]
+- [Framework]
+- [NPM]
+
+## Installation Guide 🛠️
+
+\`\`\`bash
+# Clone the repository
+git clone 
+https://github.com/username/your-project.git
+
+# Install dependencies
+cd your-app
+npm install
+
+# Run the application
+npm start
+\`\`\`
+
+## Usage 📋
+
+1. [Add-your-project-usage-here]
+2. [Add-your-project-usage-here]
+3. [Add-your-project-usage-here]
+
+## Contributing 🙌
+
+We welcome contributions to improve this project. Please refer to the [contributing guidelines](CONTRIBUTING.md) for details.
+
+## License 🛡️
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for more information.
+
+
+`;
