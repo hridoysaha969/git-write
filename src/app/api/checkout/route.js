@@ -1,6 +1,6 @@
 import dbConnect from "@/lib/connection";
 import { Transaction } from "@/lib/models/Transaction";
-import { User } from "lucide-react";
+import { User } from "@/lib/models/User";
 import { NextResponse } from "next/server";
 
 const { default: Stripe } = require("stripe");

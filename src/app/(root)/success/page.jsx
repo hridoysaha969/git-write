@@ -4,7 +4,7 @@ import { CheckCircle, Loader2, OctagonX } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { notFound, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 
 function PaymentSuccessContent() {
@@ -15,7 +15,7 @@ function PaymentSuccessContent() {
   const router = useRouter();
 
   if (!sessionId) {
-    router.push("/not-found"); // Redirect to a custom 404 page
+    router.push("/cancel"); // Redirect to a custom 404 page
     return null; // Return null to stop rendering
   }
 
