@@ -14,8 +14,10 @@ export default function PaymentSuccess() {
   const [success, setSuccess] = useState(false);
   const router = useRouter();
 
+  if (!sessionId) notFound();
+
   useEffect(() => {
-    if (!sessionId || sessionId.trim() === "") rediecting();
+    // if (!sessionId || sessionId.trim() === "") rediecting();
 
     const verifyPayment = async () => {
       const res = await fetch(`/api/verify-payment?session_id=${sessionId}`);
