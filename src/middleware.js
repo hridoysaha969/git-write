@@ -12,6 +12,12 @@ export async function middleware(request) {
   if (!token && url.includes("/my-readme")) {
     return NextResponse.redirect(new URL("/", request.url));
   }
+  if (!token && url.includes("/success")) {
+    return NextResponse.redirect(new URL("/sign-in", request.url));
+  }
+  if (!token && url.includes("/cancel")) {
+    return NextResponse.redirect(new URL("/sign-in", request.url));
+  }
 
   if (token) {
     try {
@@ -28,6 +34,12 @@ export async function middleware(request) {
       }
       if (!payload.email && url.includes("/my-readme")) {
         return NextResponse.redirect(new URL("/", request.url));
+      }
+      if (!payload.email && url.includes("/success")) {
+        return NextResponse.redirect(new URL("/sign-in", request.url));
+      }
+      if (!payload.email && url.includes("/cancel")) {
+        return NextResponse.redirect(new URL("/sign-in", request.url));
       }
     } catch (error) {
       console.log("verification failed!", error.message);

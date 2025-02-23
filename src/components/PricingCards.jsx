@@ -1,8 +1,44 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "./ui/button";
+import { loadStripe } from "@stripe/stripe-js";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
+
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+);
 
 const PricingCards = ({ plans }) => {
+  const [loading, setLoading] = useState();
+  const { currentUser } = useAuth();
+  const router = useRouter();
+
+  const handleCheckout = async (id, title, amount, credits) => {
+    if (!currentUser || !currentUser.email) {
+      router.push("/sign-in");
+      return;
+    }
+
+    setLoading(true);
+    const response = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id,
+        title,
+        amount,
+        credits,
+        email: currentUser?.email,
+      }),
+    });
+    const { sessionId } = await response.json();
+    const stripe = await stripePromise;
+    await stripe?.redirectToCheckout({ sessionId });
+
+    setLoading(false);
+  };
+
   return (
     <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-3">
       {plans.map((plan, index) => (
@@ -28,8 +64,14 @@ const PricingCards = ({ plans }) => {
               </li>
             ))}
           </ul>
-          <Button className="mt-8 w-full py-3 font-semibold rounded-lg transition-colors">
-            Get {plan.title}
+          <Button
+            className="mt-8 w-full py-3 font-semibold rounded-lg transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+            onClick={() =>
+              handleCheckout(plan.id, plan.title, plan.price, plan.credits)
+            }
+            disabled={loading}
+          >
+            {loading ? "Redirecting..." : `Get ${plan.title}`}
           </Button>
           {plan.title === "Pro" && (
             <span className="absolute top-4 right-4 bg-gradient-to-r from-[#FF512F] to-[#DD2476] text-white text-xs font-semibold px-3 py-1 rounded-full">

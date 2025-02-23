@@ -1,4 +1,11 @@
-import { ENTERPRICE_PLAN, PREMIUM_PLAN, STANDARD_PLAN } from "./prices";
+import {
+  ENTERPRICE_CREDITS,
+  ENTERPRICE_PLAN,
+  PREMIUM_PLAN,
+  PRO_CREDITS,
+  STANDARD_PLAN,
+  STARTER_CREDITS,
+} from "./prices";
 
 export const SECTIONS = [
   {
@@ -207,8 +214,10 @@ export const PLANS = [
   //   ],
   // },
   {
+    id: "gitwrite_starter_01",
     title: "Starter",
     price: STANDARD_PLAN,
+    credits: STARTER_CREDITS,
     description:
       "Ideal for personal projects and continuous professional development.",
     features: [
@@ -218,8 +227,10 @@ export const PLANS = [
     ],
   },
   {
+    id: "gitwrite_pro_02",
     title: "Pro",
     price: PREMIUM_PLAN,
+    credits: PRO_CREDITS,
     description: "Great for developers managing multiple repositories.",
     features: [
       "500 AI-generated README files",
@@ -229,8 +240,10 @@ export const PLANS = [
     ],
   },
   {
+    id: "gitwrite_enterprise_03",
     title: "Enterprise",
     price: ENTERPRICE_PLAN,
+    credits: ENTERPRICE_CREDITS,
     description: "Best for agencies and large teams.",
     features: [
       "1000 AI-generated README files",
@@ -301,9 +314,6 @@ export const PROJECT = `# [your-project-title] ✨
 ## Installation Guide 🛠️
 
 \`\`\`bash
-# Clone the repository
-git clone https://github.com/username/your-project.git
-
 # Install dependencies
 cd your-app
 npm install
