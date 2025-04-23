@@ -38,7 +38,7 @@ export async function POST(req) {
   const tokenCookie = await cookieStore.get("_user_session_token"); //Get The Cookie Object
   const token = tokenCookie?.value || "";
 
-  const { title, description, technologies, features } = payload;
+  const { title, description, technologies } = payload;
 
   // Body Validation
   if (!title || !description || !technologies) {
@@ -87,7 +87,7 @@ export async function POST(req) {
     }
 
     // Generate README using Gemini API
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
     const result = await model.generateContent(
       template({ title, description, technologies })
     );
@@ -95,55 +95,6 @@ export async function POST(req) {
     // Extract response text safely
     const responseText = result?.response?.text() || "No response generated.";
     return NextResponse.json({ success: true, readme: responseText });
-    // try {
-    //   const user = await User.findOne({ email: payload.email });
-    //   if (user.credits < 1) {
-    //     return NextResponse.json(
-    //       {
-    //         message: "Insufficient credits! Please upgrade your plan.",
-    //         success: false,
-    //       },
-    //       { status: 400 }
-    //     );
-    //   }
-    //   if (!user.isVerified) {
-    //     return NextResponse.json(
-    //       {
-    //         message:
-    //           "User email is not verified. Please verify your email and try again.",
-    //         success: false,
-    //       },
-    //       { status: 400 }
-    //     );
-    //   }
-    //   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-    //   const result = await model.generateContent(
-    //     template({ title, description, technologies })
-    //   );
-    //   const responseText = result.response.text();
-
-    //   const updateUser = await User.findOneAndUpdate(
-    //     { email: payload.email },
-    //     { credits: user.credits - 1 }
-    //   );
-    //   if (!updateUser) {
-    //     return NextResponse.json(
-    //       { mesage: "Error updating credits. Try Again!", success: false },
-    //       { status: 400 }
-    //     );
-    //   }
-
-    //   return NextResponse.json({
-    //     success: true,
-    //     readme: responseText,
-    //   });
-    // } catch (error) {
-    //   console.error("Gemini API Error:", error);
-    //   return NextResponse.json(
-    //     { success: false, error: error.message },
-    //     { status: 500 }
-    //   );
-    // }
   } catch (error) {
     console.error("API Error:", error);
     return NextResponse.json(

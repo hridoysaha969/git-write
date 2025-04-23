@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# GitWrite - README Generator Tool
+
+✨ Generate beautiful and informative README files effortlessly! ✨
+
+**GitWrite** is an online tool that simplifies the process of creating professional README files for your GitHub repositories.  It offers pre-built blocks for common sections and leverages the power of AI to help you generate compelling content quickly.
+
+## Features
+
+* **Pre-built Blocks:**  Choose from a variety of pre-designed sections (e.g., Features, Installation, Usage, Contributing) to quickly build your README.
+* **AI-Powered Generation:** Leverage AI to generate README content based on your project description and specifications.
+* **Intuitive Interface:**  Enjoy a user-friendly interface for seamless README creation.
+* **Customizable:** Tailor the generated README to match your project's branding and style.
+
+## Tech Stack
+
+* **Next.js:**  For a robust and performant frontend.
+* **Tailwind CSS:**  For rapid UI development and styling.
+* **Shadcn/UI:**  For readily available and customizable UI components.
+* **Gemini API:**  For AI-powered content generation.
+
 
 ## Getting Started
 
-First, run the development server:
+Once GitWrite is live, you'll be able to access it directly from your web browser. Here's a quick overview of how to get started:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **Visit the GitWrite Website:**  
+   Head over to [website URL will be here].
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Enter Project Details:**  
+   Fill in basic information about your project—such as the name, a short description, keywords, and primary programming language. This helps GitWrite generate more relevant README content.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+3. **Select Sections:**  
+   Choose which sections you want to include from the available pre-built blocks (e.g., Features, Installation, Usage).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. **Use AI Assistance (Optional):**  
+   If you’d like, enable AI assistance to help generate content based on your project description. The AI can draft sections like your overview, features, or usage instructions.
 
-## Learn More
+5. **Customize Your README:**  
+   Edit the generated content using the built-in rich text editor. You can format text, add links, insert images, and include code blocks to personalize your README.
 
-To learn more about Next.js, take a look at the following resources:
+6. **Download or Copy:**  
+   Once you're happy with your README, you can either download it as a `README.md` file or copy the Markdown directly to your clipboard to use in your GitHub repository.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contributing (Coming soon)
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the [Apache License 2.0](LICENSE).
+
+
