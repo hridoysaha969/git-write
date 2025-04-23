@@ -62,7 +62,18 @@ yarn install
 ### Create a `.env.local` file in the root directory and add any required environment variables.
 
 ```bash
-NEXT_PUBLIC_API_BASE_URL=https://your-api.com
+
+MONGODB_URL=your-mongodb-uri
+JWT_SECRET=your-jwt-secret
+SUPPORT_EMAIL=your-email
+EMAIL_USER=your-gmail-username
+EMAIL_PASS=your-google-app-password
+NEXT_PUBLIC_BASE_URL=http://localhost:3000/
+NEXT_PUBLIC_GEMINI_API_KEY=your-gemini-api-key
+STRIPE_SECRET_KEY=your-stripe-key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
+STRIPE_WEBHOOK_SECRET=your-stripe-webhook
+
 ```
 
 ### Run the Development Server
