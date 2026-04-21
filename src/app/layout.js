@@ -62,6 +62,9 @@ export const metadata = {
       follow: true,
     },
   },
+  verification: {
+    google: "XEMgd7RKGn4CeyfrveEJT3rTF36Cr0ESmGiXb_FW4Qg", // e.g., 'XEgLx8VtP3...'
+  },
 };
 
 export default function RootLayout({ children }) {

@@ -1,0 +1,19 @@
+# robots.txt
+User-agent: *
+Allow: /
+
+# Disallow admin or internal pages (if any)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /cancel/
+Disallow: /success/
+Disallow: /verify-email/
+
+# Sitemap location
+Sitemap: https://gitwrite.vercel.app/sitemap.xml
+
+# Crawl delay (optional, respectful to server)
+Crawl-delay: 1
+
+# Host (optional, preferred domain)
+Host: https://gitwrite.vercel.app/

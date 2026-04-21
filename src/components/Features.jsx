@@ -1,49 +1,64 @@
-import { Box, MonitorDown, PencilRuler, WandSparkles } from "lucide-react";
+// Features.jsx
+import { Zap, Eye, Download, Wand2 } from "lucide-react";
+
+const features = [
+  {
+    icon: Wand2,
+    title: "AI‑Powered Templates",
+    description:
+      "Generate professional READMEs from just a few inputs – no more blank page anxiety.",
+  },
+  {
+    icon: Eye,
+    title: "Live Preview",
+    description:
+      "See your README render in real-time as you type. Markdown formatting instantly visible.",
+  },
+  {
+    icon: Download,
+    title: "One‑Click Export",
+    description:
+      "Download your README.md file instantly, ready to push to GitHub.",
+  },
+  {
+    icon: Zap,
+    title: "GitHub Optimized",
+    description:
+      "Follows best practices – badges, headings, code blocks, and tables that actually work.",
+  },
+];
 
 export default function Features() {
   return (
-    <section className="py-16">
-      <div className="max-w-6xl mx-auto text-center px-6">
-        <h2 className="text-2xl md:text-4xl text-zinc-800 font-bold mb-6">
-          Powerful Features for Effortless README Generation
-        </h2>
-        <p className="text-lg text-zinc-600 mb-12">
-          Simplify your workflow with AI-powered suggestions, customization
-          options, and seamless downloads.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <FeatureCard
-            icon={<WandSparkles />}
-            title="AI-Powered Generation"
-            description="Generate professional README files with AI-powered suggestions and templates."
-          />
-          <FeatureCard
-            icon={<PencilRuler />}
-            title="Customizable Blocks"
-            description="Edit, reorder, or add custom markdown blocks to fit your project needs."
-          />
-          <FeatureCard
-            icon={<Box />}
-            title="Prebuilt Markdown Blocks"
-            description="Choose from a variety of pre-designed markdown components for easy integration."
-          />
-          <FeatureCard
-            icon={<MonitorDown />}
-            title="One-Click Export"
-            description="Download your README file in .md format instantly, ready for GitHub and beyond."
-          />
+    <section className="py-24 bg-white">
+      <div className="container max-w-6xl mx-auto px-4">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Everything you need to create a{" "}
+            <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+              stunning README
+            </span>
+          </h2>
+          <p className="text-gray-600 text-lg">
+            No more wrestling with Markdown syntax or formatting. GitWrite does
+            the heavy lifting.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {features.map(({ icon: Icon, title, description }) => (
+            <div key={title} className="text-center group">
+              <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:bg-purple-200 transition-colors">
+                <Icon className="w-8 h-8 text-purple-700" strokeWidth={1.5} />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                {title}
+              </h3>
+              <p className="text-gray-500">{description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
-  );
-}
-
-function FeatureCard({ icon, title, description }) {
-  return (
-    <div className="bg-slate-50 p-6 rounded-2xl shadow-lg text-start hover:bg-slate-100 transition duration-300">
-      <div className="text-4xl text-blue-400 mb-4">{icon}</div>
-      <h3 className="text-xl text-zinc-800 font-semibold mb-2">{title}</h3>
-      <p className="text-zinc-600">{description}</p>
-    </div>
   );
 }

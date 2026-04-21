@@ -87,7 +87,7 @@ export async function POST(req) {
     }
 
     // Generate README using Gemini API
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" }); // gemini-1.5-pro
     const result = await model.generateContent(
       template({ title, description, technologies })
     );
@@ -96,10 +96,19 @@ export async function POST(req) {
     const responseText = result?.response?.text() || "No response generated.";
     return NextResponse.json({ success: true, readme: responseText });
   } catch (error) {
-    console.error("API Error:", error);
-    return NextResponse.json(
-      { message: error.message, success: false },
-      { status: 500 }
-    );
+    if (error.message.includes("Too Many Requests")) {
+      return NextResponse.json(
+        {
+          message: "Rate limit exceeded. Please try again later.",
+          success: false,
+        },
+        { status: 429 }
+      );
+    } else {
+      return NextResponse.json(
+        { message: error.message, success: false },
+        { status: 500 }
+      );
+    }
   }
 }

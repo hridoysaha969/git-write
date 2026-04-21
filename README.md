@@ -16,7 +16,9 @@
 - **Next.js:** For a robust and performant frontend.
 - **Tailwind CSS:** For rapid UI development and styling.
 - **Shadcn/UI:** For readily available and customizable UI components.
+- **MongoDB:** For database management.
 - **Gemini API:** For AI-powered content generation.
+- **Stripe:** For seemless and secure payment gateway.
 
 ## Getting Started
 

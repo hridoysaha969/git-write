@@ -25,6 +25,7 @@ export function AuthProvider({ children }) {
 
     fetchUser();
   }, []);
+  
 
   //   Signup function
   const signUp = async (name, email, password, type, aggrement) => {
