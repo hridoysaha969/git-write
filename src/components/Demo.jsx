@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Eye, FileText, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 export default function Demo() {
   const [projectName, setProjectName] = useState("My Awesome Project");
@@ -60,13 +61,13 @@ MIT
       <div className="container max-w-7xl mx-auto px-4">
         {/* Section header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 bg-[#FF512F]/10 text-[#FF512F] px-4 py-1.5 rounded-full text-sm font-medium mb-4">
             <Sparkles size={16} />
             Live Preview
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Create. Preview.{" "}
-            <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#FF512F] to-[#DD2476] bg-clip-text text-transparent">
               Download.
             </span>
           </h2>
@@ -81,7 +82,7 @@ MIT
           {/* Left panel - Input form */}
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
             <div className="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center gap-2">
-              <FileText size={18} className="text-purple-600" />
+              <FileText size={18} className="text-[#FF512F]" />
               <span className="font-semibold text-gray-700">
                 Project Details
               </span>
@@ -130,7 +131,7 @@ MIT
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden flex flex-col">
             <div className="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Eye size={18} className="text-purple-600" />
+                <Eye size={18} className="text-[#FF512F]" />
                 <span className="font-semibold text-gray-700">
                   README Preview
                 </span>
@@ -154,10 +155,13 @@ MIT
 
         {/* Download CTA */}
         <div className="text-center mt-12">
-          <button className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all hover:scale-105">
+          <Link
+            href="/generate"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#FF512F] to-[#DD2476] text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all hover:scale-105"
+          >
             <FileText size={18} />
             Download README.md
-          </button>
+          </Link>
           <p className="text-sm text-gray-500 mt-3">
             Ready to push to GitHub • No signup required
           </p>

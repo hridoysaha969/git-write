@@ -18,10 +18,10 @@ export default function SocialProof() {
 
       <div className="container max-w-6xl mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
-          <p className="text-sm uppercase tracking-wider text-purple-600 font-semibold mb-3">
+          <p className="text-sm uppercase tracking-wider text-zinc-800 font-semibold mb-3">
             ✨ Trusted by developers worldwide
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-blue-500 mx-auto rounded-full" />
+          <div className="w-24 h-1 bg-gradient-to-r from-[#FF512F] to-[#DD2476] mx-auto rounded-full" />
         </div>
 
         <div className="flex flex-wrap justify-center gap-8">
@@ -32,7 +32,7 @@ export default function SocialProof() {
             >
               <Icon
                 size={40}
-                className="mb-3 text-purple-600 group-hover:scale-110 transition-transform duration-300"
+                className="mb-3 text-[#FF512F] group-hover:scale-110 transition-transform duration-300"
                 strokeWidth={1.5}
               />
               <span className="text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">

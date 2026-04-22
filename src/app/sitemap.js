@@ -10,6 +10,9 @@ const staticRoutes = [
   { url: "/contact", priority: 0.7, changefreq: "monthly" },
   { url: "/generate", priority: 0.8, changefreq: "weekly" },
   { url: "/pricing", priority: 0.7, changefreq: "monthly" },
+  { url: "/terms", priority: 0.7, changefreq: "monthly" },
+  { url: "/privacy", priority: 0.7, changefreq: "monthly" },
+  { url: "/faq", priority: 0.7, changefreq: "weekly" },
 ];
 
 // If you have dynamic routes (e.g., blog posts, user profiles), fetch them here

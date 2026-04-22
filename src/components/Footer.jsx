@@ -23,12 +23,15 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-3">Product</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#features" className="hover:text-white transition">
+                <a href="/#features" className="hover:text-white transition">
                   Features
                 </a>
               </li>
               <li>
-                <a href="#how-it-works" className="hover:text-white transition">
+                <a
+                  href="/#how-it-works"
+                  className="hover:text-white transition"
+                >
                   How it works
                 </a>
               </li>

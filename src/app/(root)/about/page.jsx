@@ -1,7 +1,43 @@
 // About.jsx
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import { Target, Heart, Users, Zap, Shield, Globe } from "lucide-react";
+import { Target, Heart, Users } from "lucide-react";
+
+export const metadata = {
+  title: "About GitWrite – Our Mission & Story",
+  description:
+    "Learn about GitWrite – the team, our mission to simplify documentation, and why we built the best README generator for developers.",
+  keywords: [
+    "about gitwrite",
+    "readme generator story",
+    "developer tools company",
+  ],
+  alternates: {
+    canonical: "https://gitwrite.vercel.app/about",
+  },
+  openGraph: {
+    title: "About GitWrite – Our Mission & Story",
+    description:
+      "Learn about GitWrite – the team, our mission to simplify documentation, and why we built the best README generator for developers.",
+    url: "https://gitwrite.vercel.app/about",
+    type: "website",
+    images: [{ url: "https://gitwrite.vercel.app/og-about.png" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About GitWrite – Our Mission & Story",
+    description:
+      "Learn about GitWrite – the team, our mission to simplify documentation, and why we built the best README generator for developers.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+};
 
 export default function About() {
   const values = [

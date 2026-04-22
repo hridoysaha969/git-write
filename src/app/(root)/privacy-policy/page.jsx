@@ -1,5 +1,27 @@
 import Navbar from "@/components/Navbar";
 
+// app/privacy/page.js
+export const metadata = {
+  title: 'Privacy Policy – GitWrite',
+  description: 'Your privacy matters. Read how GitWrite handles data – we do not store or share any of your project information.',
+  keywords: 'privacy policy, data protection, no data storage',
+  alternates: {
+    canonical: 'https://gitwrite.vercel.app/privacy',
+  },
+  openGraph: {
+    title: 'Privacy Policy – GitWrite',
+    description: 'Your privacy matters. Read how GitWrite handles data – we do not store or share any of your project information.',
+    url: 'https://gitwrite.vercel.app/privacy',
+    type: 'website',
+    images: [{ url: 'https://gitwrite.vercel.app/og-privacy.png' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Privacy Policy – GitWrite',
+    description: 'Your privacy matters. Read how GitWrite handles data – we do not store or share any of your project information.',
+  },
+};
+
 // pages/privacy-policy.js
 export default function PrivacyPolicy() {
   return (

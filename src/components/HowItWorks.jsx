@@ -24,12 +24,12 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-white" id="how-it-works">
       <div className="container max-w-6xl mx-auto px-4">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             How{" "}
-            <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#FF512F] to-[#DD2476] bg-clip-text text-transparent">
               GitWrite
             </span>{" "}
             works
@@ -45,12 +45,12 @@ export default function HowItWorks() {
             <div key={idx} className="flex-1 text-center max-w-xs mx-auto">
               <div className="relative">
                 {/* Step number badge (optional) */}
-                <div className="absolute -top-3 -left-3 w-8 h-8 bg-purple-100 text-purple-700 rounded-full flex items-center justify-center text-sm font-bold">
+                <div className="absolute -top-3 -left-3 w-8 h-8 bg-purple-100 text-[#FF512F] rounded-full flex items-center justify-center text-sm font-bold">
                   {idx + 1}
                 </div>
                 <div className="w-20 h-20 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-md">
                   <Icon
-                    className="w-10 h-10 text-purple-700"
+                    className="w-10 h-10 text-[#FF512F]"
                     strokeWidth={1.5}
                   />
                 </div>

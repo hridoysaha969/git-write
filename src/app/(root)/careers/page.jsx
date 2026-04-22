@@ -13,6 +13,36 @@ import {
   Sparkles,
 } from "lucide-react";
 
+// app/careers/page.js
+export const metadata = {
+  title: 'Collaborate with GitWrite – Open Source & Partnerships',
+  description: 'Join the GitWrite community – contribute code, write content, or partner with us. Help shape the future of documentation tools.',
+  keywords: 'collaborate, open source, contribute, partnerships, developer community',
+  alternates: {
+    canonical: 'https://gitwrite.vercel.app/careers',
+  },
+  openGraph: {
+    title: 'Collaborate with GitWrite – Open Source & Partnerships',
+    description: 'Join the GitWrite community – contribute code, write content, or partner with us. Help shape the future of documentation tools.',
+    url: 'https://gitwrite.vercel.app/careers',
+    type: 'website',
+    images: [{ url: 'https://gitwrite.vercel.app/og-careers.png' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Collaborate with GitWrite – Open Source & Partnerships',
+    description: 'Join the GitWrite community – contribute code, write content, or partner with us.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+};
+
 const benefits = [
   {
     icon: Globe,

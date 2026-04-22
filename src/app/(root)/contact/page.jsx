@@ -13,6 +13,36 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
+// app/contact/page.js
+// export const metadata = {
+//   title: 'Contact GitWrite – Get in Touch',
+//   description: 'Have questions, feedback, or partnership ideas? Contact the GitWrite team – we reply within 24 hours.',
+//   keywords: 'contact gitwrite, support, feedback, partnership inquiry',
+//   alternates: {
+//     canonical: 'https://gitwrite.vercel.app/contact',
+//   },
+//   openGraph: {
+//     title: 'Contact GitWrite – Get in Touch',
+//     description: 'Have questions, feedback, or partnership ideas? Contact the GitWrite team – we reply within 24 hours.',
+//     url: 'https://gitwrite.vercel.app/contact',
+//     type: 'website',
+//     images: [{ url: 'https://gitwrite.vercel.app/og-contact.png' }],
+//   },
+//   twitter: {
+//     card: 'summary_large_image',
+//     title: 'Contact GitWrite – Get in Touch',
+//     description: 'Have questions, feedback, or partnership ideas? Contact the GitWrite team.',
+//   },
+//   robots: {
+//     index: true,
+//     follow: true,
+//     googleBot: {
+//       index: true,
+//       follow: true,
+//     },
+//   },
+// };
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",

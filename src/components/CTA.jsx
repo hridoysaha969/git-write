@@ -1,9 +1,10 @@
 // FinalCTA.jsx
 import { ArrowRight, Github, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 export default function FinalCTA() {
   return (
-    <section className="py-24 bg-gradient-to-r from-purple-600 via-purple-500 to-blue-600">
+    <section className="py-24 bg-gradient-to-r from-[#FF512F] to-[#DD2476]">
       <div className="container max-w-4xl mx-auto px-4 text-center">
         {/* Small badge */}
         <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-1.5 rounded-full text-sm font-medium mb-6">
@@ -21,14 +22,13 @@ export default function FinalCTA() {
 
         {/* CTA buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="inline-flex items-center justify-center gap-2 bg-white text-purple-700 px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all hover:scale-105">
+          <Link
+            href="/generate"
+            className="inline-flex items-center justify-center gap-2 bg-white text-[#FF512F] px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all hover:scale-105"
+          >
             Start creating now
             <ArrowRight size={18} />
-          </button>
-          <button className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm text-white border border-white/30 px-8 py-3 rounded-xl font-semibold hover:bg-white/20 transition-all">
-            <Github size={18} />
-            View on GitHub
-          </button>
+          </Link>
         </div>
 
         {/* Trust indicator */}
