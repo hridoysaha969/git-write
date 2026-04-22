@@ -3,28 +3,6 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { PLANS } from "@/lib/constant";
 import React from "react";
 
-// app/pricing/page.js
-export const metadata = {
-  title: 'Pricing – GitWrite is Free Forever',
-  description: 'GitWrite is completely free – no hidden costs, no credit card. All features included. Upgrade to Pro for custom templates (coming soon).',
-  keywords: 'pricing, free readme generator, no subscription',
-  alternates: {
-    canonical: 'https://gitwrite.vercel.app/pricing',
-  },
-  openGraph: {
-    title: 'Pricing – GitWrite is Free Forever',
-    description: 'GitWrite is completely free – no hidden costs, no credit card. All features included.',
-    url: 'https://gitwrite.vercel.app/pricing',
-    type: 'website',
-    images: [{ url: 'https://gitwrite.vercel.app/og-pricing.png' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Pricing – GitWrite is Free Forever',
-    description: 'GitWrite is completely free – no hidden costs, no credit card.',
-  },
-};
-
 export default function PricingSection() {
   const plans = PLANS;
 
