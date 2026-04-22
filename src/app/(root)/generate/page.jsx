@@ -6,28 +6,6 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { SectionProvider } from "@/contexts/SectionContext";
 
-// app/generate/page.js
-export const metadata = {
-  title: 'Generate README – Free Markdown Editor | GitWrite',
-  description: 'Use our free README generator – live Markdown preview, custom sections, one-click download. No signup required.',
-  keywords: 'generate readme, markdown editor, create readme online, free readme generator',
-  alternates: {
-    canonical: 'https://gitwrite.vercel.app/generate',
-  },
-  openGraph: {
-    title: 'Generate README – Free Markdown Editor | GitWrite',
-    description: 'Use our free README generator – live Markdown preview, custom sections, one-click download. No signup required.',
-    url: 'https://gitwrite.vercel.app/generate',
-    type: 'website',
-    images: [{ url: 'https://gitwrite.vercel.app/og-generate.png' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Generate README – Free Markdown Editor | GitWrite',
-    description: 'Use our free README generator – live Markdown preview, custom sections, one-click download.',
-  },
-};
-
 export default function Page() {
   return (
     <SectionProvider>
